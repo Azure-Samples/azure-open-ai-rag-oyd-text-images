@@ -1,0 +1,29 @@
+{
+  "name": "INDEX_NAME_HERE-indexer",
+  "description": null,
+  "dataSourceName": "INDEX_NAME_HERE-datasource",
+  "skillsetName": "INDEX_NAME_HERE-skillset",
+  "targetIndexName": "INDEX_NAME_HERE",
+  "disabled": null,
+  "schedule": null,
+  "parameters": {
+    "batchSize": null,
+    "maxFailedItems": null,
+    "maxFailedItemsPerBatch": null,
+    "base64EncodeKeys": null,
+    "configuration": {
+      "dataToExtract": "contentAndMetadata",
+      "parsingMode": "jsonArray"
+    }
+  },
+  "fieldMappings": [
+    {
+      "sourceFieldName": "metadata_storage_name",
+      "targetFieldName": "title",
+      "mappingFunction": null
+    }
+  ],
+  "outputFieldMappings": [],
+  "cache": null,
+  "encryptionKey": null
+}

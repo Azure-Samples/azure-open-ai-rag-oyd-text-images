@@ -1,0 +1,77 @@
+{
+  "name": "INDEX_NAME_HERE-skillset",
+  "description": "Skillset to chunk documents and generate embeddings",
+  "skills": [
+    {
+      "@odata.type": "#Microsoft.Skills.Text.AzureOpenAIEmbeddingSkill",
+      "name": "#2",
+      "description": null,
+      "context": "/document",
+      "resourceUri": "AOAI_URI_HERE",
+      "apiKey": "AOAI_API_KEY_HERE",
+      "deploymentId": "AOAI_DEPLOYMENT_ID_HERE",
+      "dimensions": 1536,
+      "modelName": "AOAI_MODEL_NAME_HERE",
+      "inputs": [
+        {
+          "name": "text",
+          "source": "/document/content/chunk"
+        }
+      ],
+      "outputs": [
+        {
+          "name": "embedding",
+          "targetName": "text_vector"
+        }
+      ],
+      "authIdentity": null
+    }
+  ],
+  "cognitiveServices": null,
+  "knowledgeStore": null,
+  "indexProjections": {
+    "selectors": [
+      {
+        "targetIndexName": "INDEX_NAME_HERE",
+        "parentKeyFieldName": "parent_id",
+        "sourceContext": "/document",
+        "mappings": [
+          {
+            "name": "text_vector",
+            "source": "/document/text_vector",
+            "sourceContext": null,
+            "inputs": []
+          },
+          {
+            "name": "chunk",
+            "source": "/document/content/chunk",
+            "sourceContext": null,
+            "inputs": []
+          },
+          {
+            "name": "url",
+            "source": "/document/content/imgurl",
+            "sourceContext": null,
+            "inputs": []
+          },
+          {
+            "name": "filepath",
+            "source": "/document/metadata_storage_path",
+            "sourceContext": null,
+            "inputs": []
+          },
+          {
+            "name": "title",
+            "source": "/document/title",
+            "sourceContext": null,
+            "inputs": []
+          }
+        ]
+      }
+    ],
+    "parameters": {
+      "projectionMode": "skipIndexingParentDocuments"
+    }
+  },
+  "encryptionKey": null
+}

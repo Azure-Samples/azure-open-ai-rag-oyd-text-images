@@ -1,0 +1,12 @@
+{
+  "type": "azureblob",
+  "credentials": {
+    "connectionString": "ResourceId=/subscriptions/SUBSCRIPTION_ID_HERE/resourceGroups/RESOURCE_GROUP_NAME_HERE/providers/Microsoft.Storage/storageAccounts/STORAGE_ACCOUNT_NAME_HERE;"
+  },
+  "container": {
+    "name": "data",
+    "query": "prepaired_data/text"
+  },
+  "name": "INDEX_NAME_HERE-datasource",
+  "identity": null
+}

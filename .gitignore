@@ -1,0 +1,8 @@
+.env
+.env_aoai
+demo-app/.env
+demo-notebook/.env
+bicep/helpers/ai_search_logs.jsonl
+azure-function/local.settings.json
+azure-function/.python_packages
+notes.md
