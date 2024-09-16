@@ -86,7 +86,7 @@ There are two option running through the deployment:
 - **Option 2** (Recommanded): You want to go step-by-setp to gain better understanding what's invloved in setting up the solution, and only after running the demo app.
 
 
-`Note`: A helper bash script will be used to deploy all part. You can use the `-x` bash option if you'd like to see more details of what's being executed. Example: `bash -x ./helper.sh test`
+`Note`: A helper bash script will be used to deploy all parts. You can use the `-x` bash option if you'd like to see more details of what's being executed. Example: `bash -x ./helper.sh test`
 
 #### Option 1
 
