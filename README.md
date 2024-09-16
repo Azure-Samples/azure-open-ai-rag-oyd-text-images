@@ -66,7 +66,7 @@ For Azure AI Search to be configured connrectly, and demo app to work, we first 
 
 `Note`: If you don't have the models deployed, you can follow the [create and deploy an Azure OpenAI Service resource](https://learn.microsoft.com/en-us/azure/ai-services/openai/how-to/create-resource?pivots=web-portal) guide to do so.
 
-Create `.env_aoai` file in root directory of this repository. Following are the variables that need to be set, with example valies.
+Create `.env_aoai` file in root directory of this repository. Following are the variables that need to be set, with example values.
 
 You can referr to [demo application](demo-app) section for guidance on where to obtain each of the values.
 
