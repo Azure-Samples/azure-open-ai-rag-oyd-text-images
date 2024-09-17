@@ -151,6 +151,8 @@ Sample document is used that's located in `./sample-documents` directory. It's a
 11.  Run the demo app  
 `bash ./helper.sh run-demo-app`
 
+12. Try the demo app  
+Open the demo app in your browser `http://localhost:8501`. In chat window, type `Tell me about Kubernetes.`
 
 #### Cleanup
 
