@@ -1,7 +1,5 @@
 # RAG on PDF with text and embedded Images, with citations referencing image answering user query
 
-This repository focuses on highlighting the key areas how to approach building a solution for a use case of GenAI application that lets end-users ask questions about company's owned documentation that have images and diagrams. The end-user will receive the response to their question in text and images and diagrams whenever such exist on the subject being chatted about.
-
 ## Content
 - [Overview](#overview)
 - [Reference architecture](#reference-architecture)
