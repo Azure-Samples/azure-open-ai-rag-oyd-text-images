@@ -71,7 +71,7 @@ The application runtime flow operates as follows:
 7. The server-side AI chatbot application sends the response to the user's query back to the client-side application.
 8. The client-side application displays the generated response text and downloads any images from Azure Blob, rendering them in the user interface.
 
-Steps 9a and 9b are conceptual components of the reference architecture but are not currently part of the deployable artifact. We welcome your feedback and may potentially extend the implementation to include these steps.
+`Note`: Steps 9a and 9b are conceptual components of the reference architecture but are not currently part of the deployable artifact. We welcome your feedback and may potentially extend the implementation to include these steps.
 
 ### Azure Blob directory and file structure
 
