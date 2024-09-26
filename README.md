@@ -37,9 +37,9 @@ This repository is broken down in following sections (click at the hyperlink of 
 
 This section includes three diagrams:
 
-- [Document Data Management](document-data-management): This diagram illustrates the process from PDF upload and vectorization to data being indexed in Azure AI Search, making it ready to handle query requests.
-- [Application Runtime](application-runtime): This diagram outlines the complete flow of user requests and responses.
-- [Azure Blob Directory and File Structure](azure-blob-directory-and-file-structure): This diagram shows how data is organized in Azure Blob.
+- [Document Data Management](#document-data-management): This diagram illustrates the process from PDF upload and vectorization to data being indexed in Azure AI Search, making it ready to handle query requests.
+- [Application Runtime](#application-runtime): This diagram outlines the complete flow of user requests and responses.
+- [Azure Blob Directory and File Structure](#azure-blob-directory-and-file-structure): This diagram shows how data is organized in Azure Blob.
 
 
 ### Document data management
