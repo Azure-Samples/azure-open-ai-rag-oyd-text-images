@@ -225,4 +225,4 @@ Copy your document into the `./sample-documents` directory.
 3. Run Azure AI Search indexer to index your document  
 `bash ./helper.sh run-indexer`
 
-Congratulations! You can use the demo app to ask questions about your own document.
+Congratulations! You can now use the demo app to ask questions about your own document.
