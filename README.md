@@ -92,8 +92,9 @@ The directory and file structure serve the following primary purposes:
 + Permission to create and access resources in Azure
 + [Docker](https://docs.docker.com/engine/install/)
 + If you're on Windows, [WSL](https://learn.microsoft.com/en-us/windows/wsl/install) with [Ubuntu distro](https://documentation.ubuntu.com/wsl/en/latest/guides/install-ubuntu-wsl2/), [Azure CLI](https://learn.microsoft.com/cli/azure/install-azure-cli) and [Docker](https://docs.docker.com/engine/install/) to also be installed inside Ubuntu
-+ Azure Open AI chat and embedding models deployed
-
++ Azure Open AI chat and embedding models deployed  
+  `Note`: If you don't have the models deployed, you can follow the [create and deploy an Azure OpenAI Service resource](https://learn.microsoft.com/en-us/azure/ai-services/openai/how-to/create-resource?pivots=web-portal) guide to do so.  
+  `Note`: This solution was developed and tested using `gpt-4o` as the chat model, and `text-embedding-ada-002` as the embedding model. Alternative models are likely to work too, but for the best experience, we recommend using the same models whenever possible.
 
 #### Login into your Azure Tenant  
 `az login --tenant "your-tenant-id-here"`
@@ -103,10 +104,6 @@ Clone or download this repo and cd into project's root directory.
 
 #### Creating config file
 For Azure AI Search to be configured connrectly, and demo app to work, we first need to create a configuration file that will have required information about your deployed Azure Open AI chat and embedding models.
-
-`Note`: This solution was developed and tested using `gpt-4o` as the chat model, and `text-embedding-ada-002` as the embedding model. Alternative models are likely to work too, but for the best experience, we recommend using the same models whenever possible.
-
-`Note`: If you don't have the models deployed, you can follow the [create and deploy an Azure OpenAI Service resource](https://learn.microsoft.com/en-us/azure/ai-services/openai/how-to/create-resource?pivots=web-portal) guide to do so.
 
 Create `.env_aoai` file in root directory of this repository. Following are the variables that need to be set, with example values.
 
