@@ -94,8 +94,12 @@ The directory and file structure serve the following primary purposes:
 + If you're on Windows, [WSL](https://learn.microsoft.com/en-us/windows/wsl/install) with [Ubuntu distro](https://documentation.ubuntu.com/wsl/en/latest/guides/install-ubuntu-wsl2/), [Azure CLI](https://learn.microsoft.com/cli/azure/install-azure-cli) and [Docker](https://docs.docker.com/engine/install/) to also be installed inside Ubuntu
 + Azure Open AI chat and embedding models deployed
 
+
 #### Login into your Azure Tenant  
 `az login --tenant "your-tenant-id-here"`
+
+#### Git clone
+Clone or download this repo and cd into project's root directory.
 
 #### Creating config file
 For Azure AI Search to be configured connrectly, and demo app to work, we first need to create a configuration file that will storage needed information about your deployed Azure Open AI chat and embedding models.
