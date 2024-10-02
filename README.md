@@ -102,7 +102,7 @@ The directory and file structure serve the following primary purposes:
 Clone or download this repo and cd into project's root directory.
 
 #### Creating config file
-For Azure AI Search to be configured connrectly, and demo app to work, we first need to create a configuration file that will storage needed information about your deployed Azure Open AI chat and embedding models.
+For Azure AI Search to be configured connrectly, and demo app to work, we first need to create a configuration file that will have required information about your deployed Azure Open AI chat and embedding models.
 
 `Note`: This solution was developed and tested using `gpt-4o` as the chat model, and `text-embedding-ada-002` as the embedding model. Alternative models are likely to work too, but for the best experience, we recommend using the same models whenever possible.
 
