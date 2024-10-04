@@ -88,7 +88,8 @@ The directory and file structure serve the following primary purposes:
 ### Prerequisites
 
 + [Azure subscription](https://azure.microsoft.com/free/)
-+ [Azure CLI](https://learn.microsoft.com/cli/azure/install-azure-cli)
++ [Azure CLI](https://learn.microsoft.com/cli/azure/install-azure-cli)  
+  `Note`: Ensure the az bicep extension is installed. You can install it by running `az bicep install`
 + Permission to create and access resources in Azure
 + [Docker](https://docs.docker.com/engine/install/)
 + If you're on Windows, [WSL](https://learn.microsoft.com/en-us/windows/wsl/install) with [Ubuntu distro](https://documentation.ubuntu.com/wsl/en/latest/guides/install-ubuntu-wsl2/), [Azure CLI](https://learn.microsoft.com/cli/azure/install-azure-cli) and [Docker](https://docs.docker.com/engine/install/ubuntu/) to also be installed inside Ubuntu
