@@ -1,0 +1,125 @@
+# baseURL: "/"
+languageCode: en-us
+title: AI Workshop
+theme: digitalgarden
+
+relativeURLs: true
+
+# sectionPagesMenu = 'main'
+params:
+  description: "My Digital Garden on the Internet"
+  # customCSS:
+  #   href: "/static/css/main.css"
+
+menu:
+  main:
+    - identifier: home
+      name: Home
+      url: /
+      weight: 100
+    - identifier: home_workshop_overview
+      name: Workshop Overview
+      url: /workshop_overview/
+      weight: 110
+    - identifier: home_prerequisites
+      name: Prerequisites
+      url: /prerequisites/
+      weight: 120
+    
+    - identifier: ddm
+      name: 'Document Data Management'
+      params:
+        header: true
+      weight: 200
+    - identifier: ddm_overview
+      name: 1. Overview
+      url: /document_data_management/1_overview/
+      weight: 210
+    - identifier: ddm_aoai
+      name: 2. Azure OpenAI
+      url: /aoai/deploy-2/
+      weight: 220
+    - identifier: ddm_ai_search
+      name: 3. Azure AI Search
+      url: /aoai/deploy-2/
+      weight: 230
+    - identifier: ddm_doc_prep
+      name: 4. PDF Document Processing
+      url: /aoai/deploy-2/
+      weight: 240
+    - identifier: ddm_ai_search_index
+      name: 5. Load Azure AI Index
+      url: /aoai/deploy-2/
+      weight: 250
+    
+    - identifier: apprun
+      name: 'Application Runtime'
+      params:
+        header: true
+      weight: 300
+    - identifier: apprun_overview
+      name: 1. Overview
+      url: /aoai/deploy-2/
+      weight: 310
+    - identifier: apprun_demo_app
+      name: 2. Setting Up Demo App
+      url: /aoai/deploy-2/
+      weight: 320
+    - identifier: apprun_ext_solution
+      name: 3. Extending With Your Own PDF
+      url: /aoai/deploy-2/
+      weight: 330
+    
+    - identifier: chat_histroy
+      name: 'Chat History'
+      params:
+        header: true
+      weight: 400
+    - identifier: chat_histroy_overview
+      name: 1. Overview
+      url: /aoai/deploy-2/
+      weight: 410
+    - identifier: chat_histroy_cosmos_db
+      name: 2. Azure Cosmos DB
+      url: /aoai/deploy-2/
+      weight: 420
+
+
+    - identifier: references
+      name: 'References'
+      params:
+        header: true
+      weight: 500
+    - identifier: references_source_code
+      name: 'Source Code'
+      url: 'https://github.com/Azure-Samples/azure-open-ai-rag-oyd-text-images'
+      weight: 510
+    - identifier: references_resources
+      name: Further Resources
+      url: /aoai/deploy-2/
+      weight: 520
+    - identifier: references_feedback
+      name: Feedback
+      url: /aoai/deploy-2/
+      weight: 530
+
+  social:
+    - name: 'Twitter'
+      url: 'https://twitter.com'
+      weight: 1
+    - name: 'GitHub'
+      url: 'https://github.com/Azure-Samples/azure-open-ai-rag-oyd-text-images'
+      weight: 2
+    - name: 'Email'
+      url: 'mailto:user@example.org'
+      weight: 3
+    - name: 'RSS'
+      url: '/articles/index.xml'
+      weight: 4
+
+markup:
+  highlight:
+    style: "dracula"
+  goldmark:
+    renderer: 
+      unsafe: true
