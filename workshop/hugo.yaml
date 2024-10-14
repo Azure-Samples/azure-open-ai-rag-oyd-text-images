@@ -1,4 +1,4 @@
-# baseURL: "/"
+baseURL: "azure-open-ai-rag-oyd-text-images/"
 languageCode: en-us
 title: AI Workshop
 theme: digitalgarden
@@ -15,15 +15,15 @@ menu:
   main:
     - identifier: home
       name: Home
-      url: /
+      url: /azure-open-ai-rag-oyd-text-images/home/
       weight: 100
     - identifier: home_workshop_overview
       name: Workshop Overview
-      url: /workshop_overview/
+      url: /azure-open-ai-rag-oyd-text-images/workshop_overview/
       weight: 110
     - identifier: home_prerequisites
       name: Prerequisites
-      url: /prerequisites/
+      url: /azure-open-ai-rag-oyd-text-images/prerequisites/
       weight: 120
     
     - identifier: ddm
@@ -33,7 +33,7 @@ menu:
       weight: 200
     - identifier: ddm_overview
       name: 1. Overview
-      url: /document_data_management/1_overview/
+      url: /azure-open-ai-rag-oyd-text-images/document_data_management/1_overview/
       weight: 210
     - identifier: ddm_aoai
       name: 2. Azure OpenAI

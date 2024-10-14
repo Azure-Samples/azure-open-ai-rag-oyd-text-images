@@ -1,8 +1,8 @@
-<!-- ---
-title: Homepage
+---
+title: Welcome to the AI Workshop
 ---
 
-# Welcome to the AI Workshop 👋
+<!-- # Welcome to the AI Workshop 👋 -->
 
 **RAG On PDF With Text And Embedded Images, With Citations Referencing Image Answering User Query**
 
@@ -12,7 +12,7 @@ In today's workshop you will learn how to use Azure OpenAI and Azure AI Search t
 
 ![alt](/images/ArchOverviewOYD-v2.png)
 
-![alt](../images/ArchOverviewOYD-v2.png)
+![alt](../../images/ArchOverviewOYD-v2.png)
 
 <hr />
 
@@ -20,4 +20,4 @@ In today's workshop you will learn how to use Azure OpenAI and Azure AI Search t
 
 Start collecting your ideas 💡, curate thought provoking & interesting content 💬&nbsp; and learn. -->
 
-[Workshop Overview](/workshop_overview) -->
+[Workshop Overview](/workshop_overview)
