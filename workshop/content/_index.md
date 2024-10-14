@@ -10,7 +10,7 @@ In today's workshop you will learn how to use Azure OpenAI and Azure AI Search t
 
 <!-- <img src="/images/ArchOverviewOYD-v2.png" alt="ArchOverviewOYD-v2" width="640" height="auto"> -->
 
-![alt](/images/ArchOverviewOYD-v2.png)
+![alt](./images/ArchOverviewOYD-v2.png)
 
 ![alt](../images/ArchOverviewOYD-v2.png)
 
