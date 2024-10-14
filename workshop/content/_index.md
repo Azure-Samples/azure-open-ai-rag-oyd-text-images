@@ -1,23 +1,41 @@
-<!-- ---
-title: Homepage
+---
+title: Welcome to the AI Workshop
 ---
 
 # Welcome to the AI Workshop 👋
 
-**RAG On PDF With Text And Embedded Images, With Citations Referencing Image Answering User Query**
+## RAG On PDF With Text And Embedded Images, With Citations Referencing Image Answering User Query
 
-In today's workshop you will learn how to use Azure OpenAI and Azure AI Search to build a Retrieval-Augmented Generation (RAG) application with your own data. By offloading AI Search communication to Azure OpenAI, this solution not only enhances text-based queries but also provides a powerful way to identify and retrieve relevant images based on the user's query. This capability ensures that your query responses are enriched with relevant visual content whenever available.
+<!-- In today's workshop you will learn how to use Azure OpenAI and Azure AI Search to build a Retrieval-Augmented Generation (RAG) application with your own data. By offloading AI Search communication to Azure OpenAI, this solution not only enhances text-based queries but also provides a powerful way to identify and retrieve relevant images based on the user's query. This capability ensures that your query responses are enriched with relevant visual content whenever available. -->
 
-<!-- <img src="/images/ArchOverviewOYD-v2.png" alt="ArchOverviewOYD-v2" width="640" height="auto"> -->
+In this self-paste workshop you will learn about some of the key Azure services to build an application with Retrieval-Augmented Generation (RAG) capabilities on your PDF documents with text and embedded Images, with citations referencing image answering user query.
 
-![alt](./images/ArchOverviewOYD-v2.png)
+---
 
-![alt](../images/ArchOverviewOYD-v2.png)
++ Skillset: Level 200
++ Audience: Architects and Engineers
++ Workshop duration: ~3 hours
 
-<hr />
+---
 
-<!-- Building your own digital garden is not a fad. It's a necessity. Tools like Roam Research, Obsidian and Notion provided means to interlink content, even over a graphical way. Still not sold? Check out [The Digital Garden](https://dev.to/jbranchaud/the-digital-garden-l10) by Josh Branchaud.
+## Workshop content
 
-Start collecting your ideas 💡, curate thought provoking & interesting content 💬&nbsp; and learn. -->
++ [Workshop Overview](/azure-open-ai-rag-oyd-text-images/workshop_overview/)
++ [Prerequisites](/azure-open-ai-rag-oyd-text-images/prerequisites/)
++ *Document Data Management*
+  1. [Overview](/azure-open-ai-rag-oyd-text-images/document_data_management/1_overview/)
+  2. [Azure Open AI](/azure-open-ai-rag-oyd-text-images/document_data_management/2_azure_oai/)
+  3. [Azure AI Search]()
+  4. [PDF Document Processing]()
+  5. [Load Azure AI Index]()
++ *Application Runtime*
+  1. [Overview]()
+  2. [Setting Up Demo App]()
+  3. [Extending With Your Own PDF]()
++ *Chat Histroy*
+  1. [Overview]()
+  2. [Azure Cosmos DB]()
 
-[Workshop Overview](/workshop_overview) -->
+---
+
+[Workshop Overview >](/azure-open-ai-rag-oyd-text-images/workshop_overview)

@@ -37,7 +37,7 @@ menu:
       weight: 210
     - identifier: ddm_aoai
       name: 2. Azure OpenAI
-      url: /aoai/deploy-2/
+      url: /document_data_management/2_azure_oai/
       weight: 220
     - identifier: ddm_ai_search
       name: 3. Azure AI Search

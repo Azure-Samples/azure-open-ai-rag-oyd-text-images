@@ -54,6 +54,4 @@ To enhance the application further, we can implement a feature to store and retr
 
 ---
 
-<!-- [<< Home](/) | [Prerequisites >>](/prerequisites) -->
-
-[Home](/) | [Prerequisites](/prerequisites)
+[< Home](/azure-open-ai-rag-oyd-text-images) | [Prerequisites >](/azure-open-ai-rag-oyd-text-images/prerequisites)
