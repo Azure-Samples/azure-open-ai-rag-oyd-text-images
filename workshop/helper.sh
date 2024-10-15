@@ -4,8 +4,9 @@ case $@ in
   hugo-up|hup)
     hugo serve -D
     ;;
-  dryrun-create-resource-group)
-    echo "az group create --name ${resource_group_name} --location ${region}"
+  git-submodule-init|gsi)
+    git submodule init 
+    git submodule update
     ;;
   dryrun-docker-up)
     echo "$@"

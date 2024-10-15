@@ -96,14 +96,14 @@ Validate you're running inside the docker container. The command **pwd** should 
 
 ## Set environment variables
 
-To make the workshop smoother, we'll use a local file **.workshop_env** to collect and load environment variable that we'll cake use of throughout the workshop.
+To make the workshop smoother, we'll use a local file **helper.sh** to collect and load environment variable that we'll cake use of throughout the workshop.
 
 Load the default environment variables.
 
 > Note: If you close your terminal (aka exit the docker container) and open a new one, you have to re-run the command again to load the environment variables.
 
 ```bash {class="bash-class" id="bash-codeblock" lineNos=inline tabWidth=2}
-  source .workshop_env
+  source helper.sh
 ```
 
 Validate environment variables are loaded successfully. The command **echo "${region}"** should return **region="eastus"**.
@@ -121,7 +121,6 @@ Create a resource group in which all the resources in this workshop will be depl
 ```bash {class="bash-class" id="bash-codeblock" lineNos=inline tabWidth=2}
   az group create --name "${resource_group_name}" --location "${region}"
 ```
-
 
 ---
 

@@ -2,8 +2,7 @@ baseURL: "https://azure-samples.github.io/azure-open-ai-rag-oyd-text-images/"
 languageCode: en-us
 title: AI Workshop
 theme: digitalgarden
-enableEmoji: true
-
+# enableEmoji: true
 # relativeURLs: true
 
 # sectionPagesMenu = 'main'

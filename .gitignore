@@ -17,3 +17,7 @@ notes.md
 /workshop/hugo.exe
 /workshop/hugo.darwin
 /workshop/hugo.linux
+
+# temp
+.env_bk
+debug.json
