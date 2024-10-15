@@ -35,6 +35,7 @@ In this self-paste workshop you will learn about some of the key Azure services 
 + *Chat Histroy*
   1. [Overview]()
   2. [Azure Cosmos DB]()
++ [Azure Resource Clean Up]()
 
 ---
 

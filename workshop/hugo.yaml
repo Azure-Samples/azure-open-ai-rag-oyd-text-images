@@ -2,6 +2,7 @@ baseURL: "https://azure-samples.github.io/azure-open-ai-rag-oyd-text-images/"
 languageCode: en-us
 title: AI Workshop
 theme: digitalgarden
+enableEmoji: true
 
 # relativeURLs: true
 
@@ -84,24 +85,33 @@ menu:
       url: /aoai/deploy-2/
       weight: 420
 
+    - identifier: cleanup
+      name: 'Clean Up'
+      params:
+        header: true
+      weight: 500
+    - identifier: cleanup_cleanup
+      name: Azure Resource Clean Up
+      url: /aoai/deploy-2/
+      weight: 510
 
     - identifier: references
       name: 'References'
       params:
         header: true
-      weight: 500
+      weight: 900
     - identifier: references_source_code
       name: 'Source Code'
       url: 'https://github.com/Azure-Samples/azure-open-ai-rag-oyd-text-images'
-      weight: 510
+      weight: 910
     - identifier: references_resources
       name: Further Resources
       url: /aoai/deploy-2/
-      weight: 520
+      weight: 920
     - identifier: references_feedback
       name: Feedback
       url: /aoai/deploy-2/
-      weight: 530
+      weight: 930
 
   social:
     - name: 'Twitter'

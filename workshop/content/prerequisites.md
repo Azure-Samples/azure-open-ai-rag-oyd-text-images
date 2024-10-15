@@ -3,6 +3,21 @@ title: Prerequisites
 # date: 2021-12-19
 ---
 
+## Page content
+- **Prerequisites**
+  - [Prerequisites](#prerequisites) for unix-based OS
+  - [Prerequisites for Windows users](#for-windows-users-only)
+- [Login into your Azure Tenant](#login-into-your-azure-tenant)
+- [Download workshop repository from GitHub](#download-workshop-repository-from-github)
+- **Docker**
+  - [Build docker image](#build-docker-image)
+  - [Run docker container](#run-docker-container)
+  - [Exec into the docker container](#exec-into-the-docker-container)
+- [Set environment variables](#set-environment-variables)
+- [Create Azure resource group](#create-azure-resource-group)
+
+---
+
 ## Prerequisites
 
 + [Azure subscription](https://azure.microsoft.com/free/)
@@ -70,6 +85,43 @@ Lastly, exec into docker container. Going forward, please run all the commands f
 ```bash {class="bash-class" id="bash-codeblock" lineNos=inline tabWidth=2}
   bash ./helper.sh docker-exec
 ```
+
+Validate you're running inside the docker container. The command **pwd** should return **/home/ubuntu/azure-open-ai-rag-oyd-text-images**.
+
+```bash {class="bash-class" id="bash-codeblock" lineNos=inline tabWidth=2}
+  pwd
+```
+
+---
+
+## Set environment variables
+
+To make the workshop smoother, we'll use a local file **.workshop_env** to collect and load environment variable that we'll cake use of throughout the workshop.
+
+Load the default environment variables.
+
+> Note: If you close your terminal (aka exit the docker container) and open a new one, you have to re-run the command again to load the environment variables.
+
+```bash {class="bash-class" id="bash-codeblock" lineNos=inline tabWidth=2}
+  source .workshop_env
+```
+
+Validate environment variables are loaded successfully. The command **echo "${region}"** should return **region="eastus"**.
+
+```bash {class="bash-class" id="bash-codeblock" lineNos=inline tabWidth=2}
+  echo "${region}"
+```
+
+---
+
+## Create Azure resource group
+
+Create a resource group in which all the resources in this workshop will be deployed.
+
+```bash {class="bash-class" id="bash-codeblock" lineNos=inline tabWidth=2}
+  az group create --name "${resource_group_name}" --location "${region}"
+```
+
 
 ---
 
