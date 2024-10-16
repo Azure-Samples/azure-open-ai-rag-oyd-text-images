@@ -8,20 +8,6 @@ title: Deploying Azure OpenAI resource and models
 
 ## 1. Create and deploy an Azure OpenAI Service resource
 
-
-&laquo;HI&raquo;
-
-> Hi
-
-[Hi >>]()
-
-[Hi >]()
-
-&rsquo;Hi&rsquo;
-
-{{< highlight go >}} A bunch of code here {{< /highlight >}}
-
-
 <!-- [Let's deploy!!!](https://learn.microsoft.com/en-us/azure/ai-services/openai/how-to/create-resource?pivots=cli) -->
 
 We will start of by creating Azure Open AI resource in the new resource group you created in [Prerequisites](/azure-open-ai-rag-oyd-text-images/prerequisites#create-azure-resource-group) section. Please run the following connact to create the resource.
@@ -222,7 +208,7 @@ AZURE_OPENAI_API_VERSION=<chat-model-api-version>
 
 ---
 
-[<  Document Data Management: Workshop Overview](/azure-open-ai-rag-oyd-text-images/document_data_management/1_overview/) | [Document Data Management: Azure AI Search >](/azure-open-ai-rag-oyd-text-images/document_data_management/3_azure_ai_search/)
+[&laquo; Document Data Management: Workshop Overview](/azure-open-ai-rag-oyd-text-images/document_data_management/1_overview/) | [Document Data Management: Azure AI Search &raquo;](/azure-open-ai-rag-oyd-text-images/document_data_management/3_azure_ai_search/)
 
 <div class="meta_for_parser tablespecs" style="visibility:hidden">In today's era of Generative AI, customers can unlock valuable insights from their unstructured or structured data to drive business value. By infusing AI into their existing or new products, customers can create powerful applications, which puts the power of AI into the hands of their users. For these Generative AI applications to work on customers data, implementing efficient RAG (Retrieval augment generation) solution is key to make sure the right context of the data is provided to the LLM based on the user query.</div>
 
