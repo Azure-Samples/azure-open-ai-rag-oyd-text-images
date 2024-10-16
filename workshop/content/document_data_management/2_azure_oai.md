@@ -8,6 +8,20 @@ title: Deploying Azure OpenAI resource and models
 
 ## 1. Create and deploy an Azure OpenAI Service resource
 
+
+&laquo;HI&raquo;
+
+> Hi
+
+[Hi >>]()
+
+[Hi >]()
+
+&rsquo;Hi&rsquo;
+
+{{< highlight go >}} A bunch of code here {{< /highlight >}}
+
+
 <!-- [Let's deploy!!!](https://learn.microsoft.com/en-us/azure/ai-services/openai/how-to/create-resource?pivots=cli) -->
 
 We will start of by creating Azure Open AI resource in the new resource group you created in [Prerequisites](/azure-open-ai-rag-oyd-text-images/prerequisites#create-azure-resource-group) section. Please run the following connact to create the resource.
