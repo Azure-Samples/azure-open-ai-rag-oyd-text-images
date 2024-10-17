@@ -35,4 +35,4 @@ The document data management flow operates as follows:
 
 ---
 
-[< Prerequisites](/azure-open-ai-rag-oyd-text-images/prerequisites) | [Document Data Management: Azure OpenAI >](/azure-open-ai-rag-oyd-text-images/document_data_management/2_azure_oai)
+[&laquo; Prerequisites](/azure-open-ai-rag-oyd-text-images/prerequisites) | [Document Data Management: Azure OpenAI &raquo;](/azure-open-ai-rag-oyd-text-images/document_data_management/2_azure_oai)

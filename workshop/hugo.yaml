@@ -41,7 +41,7 @@ menu:
       weight: 220
     - identifier: ddm_ai_search
       name: 3. Azure AI Search
-      url: /aoai/deploy-2/
+      url: /document_data_management/3_azure_ai_search/
       weight: 230
     - identifier: ddm_doc_prep
       name: 4. PDF Document Processing

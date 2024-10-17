@@ -54,4 +54,4 @@ To enhance the application further, we can implement a feature to store and retr
 
 ---
 
-[< Home](/azure-open-ai-rag-oyd-text-images) | [Prerequisites >](/azure-open-ai-rag-oyd-text-images/prerequisites)
+[&laquo; Home](/azure-open-ai-rag-oyd-text-images) | [Prerequisites &raquo;](/azure-open-ai-rag-oyd-text-images/prerequisites)
