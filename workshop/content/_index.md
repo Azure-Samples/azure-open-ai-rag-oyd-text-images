@@ -16,6 +16,10 @@ In this self-paste workshop you will learn about some of the key Azure services 
 + Audience: Architects and Engineers
 + Workshop duration: ~3 hours
 
+Throughout the labs you will see **Get help!**, expendable section such as one below as example, that offers additional help to get through a given step. Try to not use those to the extend possible, as it will yied figuring things out on your own, but absolutely do use them if you're really stuck and can make progress. Try it out by clicking at it!
+
+<details><summary><b>Get help!</b></summary>Help text</details>
+
 ---
 
 ## Workshop content
@@ -39,4 +43,4 @@ In this self-paste workshop you will learn about some of the key Azure services 
 
 ---
 
-[Workshop Overview >](/azure-open-ai-rag-oyd-text-images/workshop_overview)
+[Workshop Overview &raquo;](/azure-open-ai-rag-oyd-text-images/workshop_overview)

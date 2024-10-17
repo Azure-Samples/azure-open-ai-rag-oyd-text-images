@@ -6,6 +6,16 @@ title: Deploying Azure OpenAI resource and models
 # - https://raw.githubusercontent.com/apvarun/digital-garden-hugo-theme/main/images/digital-garden-logo.png
 ---
 
+## Page content
+- [1. Create and deploy an Azure OpenAI Service resource](#1-create-and-deploy-an-azure-openai-service-resource)
+- [2. Retrieve information about the resource](#2-retrieve-information-about-the-resource)
+  - [2.1 Get the Azure OpenAI endpoint URL](#21-get-the-azure-openai-endpoint-url)
+  - [2.2 Get the Azure OpenAI API key](#22-get-the-azure-openai-api-key)
+- [3. Create Azure Open AI chat and embedding models](#3-create-azure-open-ai-chat-and-embedding-models)
+  - [3.1. Create Azure Open AI embedding model](#31-create-azure-open-ai-embedding-model)
+  - [3.2. Create Azure Open AI chat model](#32-create-azure-open-ai-chat-model)
+- [4. (Optional) Try the chat model in Azure OpenAI Studio playground](#4-optional-try-the-chat-model-in-azure-openai-studio-playground)
+
 ## 1. Create and deploy an Azure OpenAI Service resource
 
 <!-- [Let's deploy!!!](https://learn.microsoft.com/en-us/azure/ai-services/openai/how-to/create-resource?pivots=cli) -->
@@ -201,6 +211,12 @@ AZURE_OPENAI_CHATGPT_EMBEDDING_MODEL_NAME=<embedding-model-name>
 AZURE_OPENAI_CHATGPT_DEPLOYMENT=aoai-rag-oyd-chat
 AZURE_OPENAI_API_VERSION=<chat-model-api-version>
 ```
+
+## 4. (Optional) Try the chat model in Azure OpenAI Studio playground
+
+Since the chat model is deployed successfully, try it out in the playground! In the left navigation bar, under **Playground**, click **Chat**. You should see a chat window with free input form text box, enter your query and hit enter.
+
+![alt](../../images/document_data_management_2_azure_oai_3.png)
 
 ---
 
