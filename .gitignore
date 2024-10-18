@@ -6,3 +6,18 @@ bicep/helpers/ai_search_logs.jsonl
 azure-function/local.settings.json
 azure-function/.python_packages
 notes.md
+
+# Hugo
+/workshop/public/
+/workshop/resources/_gen/
+/workshop/assets/jsconfig.json
+/workshop/hugo.log
+/workshop/hugo_stats.json
+/workshop/.hugo_build.lock
+/workshop/hugo.exe
+/workshop/hugo.darwin
+/workshop/hugo.linux
+
+# temp
+.env_bk
+debug.json

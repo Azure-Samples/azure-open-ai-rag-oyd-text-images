@@ -6,7 +6,7 @@ bicep_deployment_name="main"
 resource_group_name="aoai-rag-oyd"
 
 index_name="search-aoai-emb"
-api_version="2024-05-01-Preview"
+api_version="2024-09-01-preview"
 search_semanic_config=search-aoai-emb-semantic-configuration
 search_query_type=vector_semantic_hybrid
 
@@ -14,6 +14,13 @@ container_name="data"
 file_name="${file_name:-"Azure-Kubernetes-Service.pdf"}"
 dest_file_path="raw_data/${file_name}"
 source_file_path="./sample-documents/${file_name}"
+
+model_deployment_name_embedding="${resource_group_name}-embedding"
+model_name_embedding="text-embedding-ada-002"
+model_version_embedding="1"
+model_deployment_name_chat="${resource_group_name}-chat"
+model_name_chat="gpt-4o"
+model_version_chat="2024-08-06"
 
 get_ai_search_token() {
   token=$(az account get-access-token --resource=https://search.azure.com --query accessToken --output tsv)
@@ -31,7 +38,7 @@ create_ai_search_data_source() {
 
     curl "${base_url}/datasources?api-version=${api_version}" \
         -H "Content-Type: application/json" \
-        -H "Authorization: Bearer ${token}" \
+        -H "api-key: ${search_service_key}" \
         --data-binary "${datasource}" >> ai_search_logs.jsonl
 
     echo "" >> ai_search_logs.jsonl && echo '{"msg": "<<< creating datasource completed"}' >> ai_search_logs.jsonl
@@ -50,7 +57,7 @@ create_ai_search_index() {
 
     curl "${base_url}/indexes?api-version=${api_version}" \
         -H "Content-Type: application/json" \
-        -H "Authorization: Bearer ${token}" \
+        -H "api-key: ${search_service_key}" \
         --data-binary "${index}" >> ai_search_logs.jsonl
     
     echo "" >> ai_search_logs.jsonl && echo '{"msg": "<<< creating index completed"}' >> ai_search_logs.jsonl
@@ -68,7 +75,7 @@ create_ai_search_skillset() {
 
     curl "${base_url}/skillsets?api-version=${api_version}" \
         -H "Content-Type: application/json" \
-        -H "Authorization: Bearer ${token}" \
+        -H "api-key: ${search_service_key}" \
         --data-binary "${skillset}" >> ai_search_logs.jsonl
 
     echo "" >> ai_search_logs.jsonl && echo '{"msg": "<<< creating skillset completed"}' >> ai_search_logs.jsonl
@@ -82,7 +89,7 @@ create_ai_search_indexer() {
 
     curl "${base_url}/indexers?api-version=${api_version}" \
         -H "Content-Type: application/json" \
-        -H "Authorization: Bearer ${token}" \
+        -H "api-key: ${search_service_key}" \
         --data-binary "${indexer}" >> ai_search_logs.jsonl
     
     echo "" >> ai_search_logs.jsonl && echo '{"msg": "<<< creating indexer completed"}' >> ai_search_logs.jsonl
@@ -163,6 +170,34 @@ case $@ in
     echo ">>> Deleting resource group"
     az group delete --resource-group "${resource_group_name}" -y
     echo "<<< Deleting resource group completed"
+    ;;
+  create-ai-search-data-source)
+    load_dot_env
+    load_dot_env_aoai
+    cd ./bicep/helpers
+
+    create_ai_search_data_source
+    ;;
+  create-ai-search-index)
+    load_dot_env
+    load_dot_env_aoai
+    cd ./bicep/helpers
+
+    create_ai_search_index
+    ;;
+  create-ai-search-skillset)
+    load_dot_env
+    load_dot_env_aoai
+    cd ./bicep/helpers
+
+    create_ai_search_skillset
+    ;;
+  create-ai-search-indexer)
+    load_dot_env
+    load_dot_env_aoai
+    cd ./bicep/helpers
+
+    create_ai_search_indexer
     ;;
   setup-ai-search)
     echo ">>> Setting up AI Search data source, index, indexer, and skillset"
@@ -287,6 +322,6 @@ case $@ in
     echo "Executing test command"
     ;;
   *)
-    echo "Command \"$@\" doesn't exist. Typo?"
+    # echo "Command \"$@\" doesn't exist. Typo?"
     ;;
 esac
