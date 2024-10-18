@@ -18,7 +18,6 @@ title: Deploying Azure AI Search resource and configuring the search index
 
 ```bash {class="bash-class" id="bash-codeblock" lineNos=inline tabWidth=2}
 random_str=$(tr -dc a-z0-9 </dev/urandom | head -c 13; echo)
-<<<<<<< HEAD
 search_service_name="${resource_group_name}-${random_str}"
 az search service create \
 	--name "${search_service_name}" \
@@ -33,35 +32,11 @@ az search service create \
 echo search_service_name="${search_service_name}" >> .env
 ```
 
-=======
-az search service create \
-	--name "${resource_group_name}-${random_str}" \
-	--resource-group "${resource_group_name}" \
-	--sku basic \
-	--semantic-search standard \
-	--partition-count 1 \
-	--replica-count 1
-```
-
-<!-- base_url  
-search_service_key  
-subscription_id
-
-subscription_id=$(az account show | jq -r .id) -->
->>>>>>> ac7f0bd (wip)
 
 Before we can configure Azure AI Search, we need to add additional data to your **.env** configuration file. 
 
 Navigate to Azure AI Search resource you just created and:
 
-<<<<<<< HEAD
-=======
-- Copy the service name and add to the **.env** file as 
-
-	```bash {class="bash-class" id="bash-codeblock" lineNos=inline tabWidth=2}
-	search_service_name=<service-name>
-	```
->>>>>>> ac7f0bd (wip)
 - Copy the **Url** and add to the **.env** file as
 
 	```bash {class="bash-class" id="bash-codeblock" lineNos=inline tabWidth=2}
@@ -69,7 +44,6 @@ Navigate to Azure AI Search resource you just created and:
 	```
 ![alt](../../images/document_data_management_3_azure_ai_search_1.png)
 
-<<<<<<< HEAD
 
 <details>
   <summary><b>Get help!</b></summary>
@@ -83,8 +57,6 @@ echo "base_url=${base_url}" >> .env
 </details>
 
 
-=======
->>>>>>> ac7f0bd (wip)
 - In the left navigation bar, click **Settings** and after click **Keys**. Copy the **Primary admin key** and add to the **.env** file as
 
 	```bash {class="bash-class" id="bash-codeblock" lineNos=inline tabWidth=2}
@@ -93,7 +65,6 @@ echo "base_url=${base_url}" >> .env
 
 ![alt](../../images/document_data_management_3_azure_ai_search_2.png)
 
-<<<<<<< HEAD
 <details>
   <summary><b>Get help!</b></summary>
 
@@ -108,8 +79,6 @@ search_service_key=$(az search admin-key show \
 echo "search_service_key=${search_service_key}" >> .env
 ```
 </details>
-=======
->>>>>>> ac7f0bd (wip)
 
 Your **.env** file should look as the following:
 
@@ -146,7 +115,6 @@ az storage account create \
 echo storage_account_name="${storage_account_name}" >> .env
 ```
 
-<<<<<<< HEAD
 Your **.env** file should look as the following:
 
 ```bash {class="bash-class" id="bash-codeblock" lineNos=inline tabWidth=2}
@@ -177,8 +145,6 @@ az storage container create \
 	--account-name "${storage_account_name}" \
 	--account-key "${storage_account_key}"
 ```
-=======
->>>>>>> ac7f0bd (wip)
 
 ## 3. Configuring Azure AI Search
 
@@ -216,16 +182,12 @@ AZURE_OPENAI_API_VERSION=<chat-model-api-version>
 search_service_name=<service-name>
 base_url=<url>
 search_service_key=<primary-admin-key>
-<<<<<<< HEAD
 storage_account_name=<storage-account-name>
-=======
->>>>>>> ac7f0bd (wip)
 subscription_id=<subscription-id>
 ```
 
 ### 3.1 Create data source
 
-<<<<<<< HEAD
 To create the Azure AI Search data source, we'll use:
 
 - **subscription_id**: we'll be looking it up from the **.env** file
@@ -414,13 +376,5 @@ Before we can populate the index, we needed to upload the raw PDFs and prepair f
 ---
 
 [&laquo; Document Data Management: Azure OpenAI](/azure-open-ai-rag-oyd-text-images/document_data_management/2_azure_oai/) | [Document Data Management: PDF Document Processing &raquo;](/azure-open-ai-rag-oyd-text-images/document_data_management/4_pdf_document_processing/)
-=======
-
-
----
-
-[&laquo; Document Data Management: Azure OpenAI](/azure-open-ai-rag-oyd-text-images/document_data_management/2_azure_oai/) | [Document Data Management: PDF Document Processing &raquo;](/azure-open-ai-rag-oyd-text-images/document_data_management/1_overview/)
->>>>>>> ac7f0bd (wip)
 
 <div class="meta_for_parser tablespecs" style="visibility:hidden">In today's era of Generative AI, customers can unlock valuable insights from their unstructured or structured data to drive business value. By infusing AI into their existing or new products, customers can create powerful applications, which puts the power of AI into the hands of their users. For these Generative AI applications to work on customers data, implementing efficient RAG (Retrieval augment generation) solution is key to make sure the right context of the data is provided to the LLM based on the user query.</div>
-
