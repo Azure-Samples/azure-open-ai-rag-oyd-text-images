@@ -45,10 +45,10 @@ menu:
       weight: 230
     - identifier: ddm_doc_prep
       name: 4. PDF Document Processing
-      url: /aoai/deploy-2/
+      url: /aoai/4_pdf_document_processing/
       weight: 240
     - identifier: ddm_ai_search_index
-      name: 5. Load Azure AI Index
+      name: 5. Populating Azure AI Index
       url: /aoai/deploy-2/
       weight: 250
     

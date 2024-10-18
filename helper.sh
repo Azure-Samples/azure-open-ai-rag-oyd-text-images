@@ -6,7 +6,7 @@ bicep_deployment_name="main"
 resource_group_name="aoai-rag-oyd"
 
 index_name="search-aoai-emb"
-api_version="2024-05-01-Preview"
+api_version="2024-09-01-preview"
 search_semanic_config=search-aoai-emb-semantic-configuration
 search_query_type=vector_semantic_hybrid
 
@@ -38,7 +38,7 @@ create_ai_search_data_source() {
 
     curl "${base_url}/datasources?api-version=${api_version}" \
         -H "Content-Type: application/json" \
-        -H "Authorization: Bearer ${token}" \
+        -H "api-key: ${search_service_key}" \
         --data-binary "${datasource}" >> ai_search_logs.jsonl
 
     echo "" >> ai_search_logs.jsonl && echo '{"msg": "<<< creating datasource completed"}' >> ai_search_logs.jsonl
@@ -57,7 +57,7 @@ create_ai_search_index() {
 
     curl "${base_url}/indexes?api-version=${api_version}" \
         -H "Content-Type: application/json" \
-        -H "Authorization: Bearer ${token}" \
+        -H "api-key: ${search_service_key}" \
         --data-binary "${index}" >> ai_search_logs.jsonl
     
     echo "" >> ai_search_logs.jsonl && echo '{"msg": "<<< creating index completed"}' >> ai_search_logs.jsonl
@@ -75,7 +75,7 @@ create_ai_search_skillset() {
 
     curl "${base_url}/skillsets?api-version=${api_version}" \
         -H "Content-Type: application/json" \
-        -H "Authorization: Bearer ${token}" \
+        -H "api-key: ${search_service_key}" \
         --data-binary "${skillset}" >> ai_search_logs.jsonl
 
     echo "" >> ai_search_logs.jsonl && echo '{"msg": "<<< creating skillset completed"}' >> ai_search_logs.jsonl
@@ -89,7 +89,7 @@ create_ai_search_indexer() {
 
     curl "${base_url}/indexers?api-version=${api_version}" \
         -H "Content-Type: application/json" \
-        -H "Authorization: Bearer ${token}" \
+        -H "api-key: ${search_service_key}" \
         --data-binary "${indexer}" >> ai_search_logs.jsonl
     
     echo "" >> ai_search_logs.jsonl && echo '{"msg": "<<< creating indexer completed"}' >> ai_search_logs.jsonl
@@ -170,6 +170,34 @@ case $@ in
     echo ">>> Deleting resource group"
     az group delete --resource-group "${resource_group_name}" -y
     echo "<<< Deleting resource group completed"
+    ;;
+  create-ai-search-data-source)
+    load_dot_env
+    load_dot_env_aoai
+    cd ./bicep/helpers
+
+    create_ai_search_data_source
+    ;;
+  create-ai-search-index)
+    load_dot_env
+    load_dot_env_aoai
+    cd ./bicep/helpers
+
+    create_ai_search_index
+    ;;
+  create-ai-search-skillset)
+    load_dot_env
+    load_dot_env_aoai
+    cd ./bicep/helpers
+
+    create_ai_search_skillset
+    ;;
+  create-ai-search-indexer)
+    load_dot_env
+    load_dot_env_aoai
+    cd ./bicep/helpers
+
+    create_ai_search_indexer
     ;;
   setup-ai-search)
     echo ">>> Setting up AI Search data source, index, indexer, and skillset"
@@ -292,6 +320,12 @@ case $@ in
     ;;
   test)
     echo "Executing test command"
+    ;;
+  debug)
+    curl 'https://aoai-rag-oyd-s4m4a1rh4c3n3.search.windows.net/datasources?api-version=2024-09-01-preview' \
+      -H 'api-key: mx7zavpS9TiuLNu4mA1dHQNvoacnHUq8E8vpwa0zW2AzSeDA6626' \
+      -H 'content-type: application/json' \
+      --data-raw $'{\n   "container" : {\n      "name" : "data",\n      "query" : "prepaired_data/text"\n   },\n   "credentials" : {\n      "connectionString" : "ResourceId=/subscriptions/5db3e345-4670-42ca-8093-a1cfdd43a4fa/resourceGroups/aoai-rag-oyd/providers/Microsoft.Storage/storageAccounts/aoairagoydasdov51vr9x0j;"\n   },\n   "identity" : null,\n   "name" : "search-aoai-emb-datasource",\n   "type" : "azureblob"\n}'
     ;;
   *)
     # echo "Command \"$@\" doesn't exist. Typo?"
