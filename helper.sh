@@ -321,12 +321,6 @@ case $@ in
   test)
     echo "Executing test command"
     ;;
-  debug)
-    curl 'https://aoai-rag-oyd-s4m4a1rh4c3n3.search.windows.net/datasources?api-version=2024-09-01-preview' \
-      -H 'api-key: mx7zavpS9TiuLNu4mA1dHQNvoacnHUq8E8vpwa0zW2AzSeDA6626' \
-      -H 'content-type: application/json' \
-      --data-raw $'{\n   "container" : {\n      "name" : "data",\n      "query" : "prepaired_data/text"\n   },\n   "credentials" : {\n      "connectionString" : "ResourceId=/subscriptions/5db3e345-4670-42ca-8093-a1cfdd43a4fa/resourceGroups/aoai-rag-oyd/providers/Microsoft.Storage/storageAccounts/aoairagoydasdov51vr9x0j;"\n   },\n   "identity" : null,\n   "name" : "search-aoai-emb-datasource",\n   "type" : "azureblob"\n}'
-    ;;
   *)
     # echo "Command \"$@\" doesn't exist. Typo?"
     ;;
