@@ -31,7 +31,7 @@ Throughout the labs you will see **Get help!**, expendable section such as one b
   2. [Azure Open AI](/azure-open-ai-rag-oyd-text-images/document_data_management/2_azure_oai/)
   3. [Azure AI Search](/azure-open-ai-rag-oyd-text-images/document_data_management/3_azure_ai_search/)
   4. [PDF Document Processing](/azure-open-ai-rag-oyd-text-images/document_data_management/4_pdf_document_processing/)
-  5. [Populating Azure AI Index]()
+  5. [Populating Azure AI Index](/azure-open-ai-rag-oyd-text-images/document_data_management/5_populating_azure_ai_index)
 + *Application Runtime*
   1. [Overview]()
   2. [Setting Up Demo App]()

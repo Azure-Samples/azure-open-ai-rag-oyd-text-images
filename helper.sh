@@ -225,13 +225,21 @@ case $@ in
   upload-pdf)
     echo ">>> Uploading PDF"
     load_dot_env
+
+    storage_account_key=$(az storage account keys list \
+      --account-name "${storage_account_name}" \
+      --resource-group "${resource_group_name}" \
+      --output tsv \
+      --query "[0].value")
+
     az storage blob upload \
       --account-name "${storage_account_name}" \
       --container-name "${container_name}" \
       --name "${dest_file_path}" \
       --file "${source_file_path}" \
+      --account-key "${storage_account_key}" \
       --overwrite
-    echo ">>> Uploading PDF completed"
+    echo "<<< Uploading PDF completed"
     ;;
   run-indexer)
     echo ">>> Triggering to run indexer"
