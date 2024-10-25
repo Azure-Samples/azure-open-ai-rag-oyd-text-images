@@ -244,14 +244,13 @@ case $@ in
   run-indexer)
     echo ">>> Triggering to run indexer"
     load_dot_env
-    get_ai_search_token
 
     base_url="https://${search_service_name}.search.windows.net"
 
     # Docs: https://learn.microsoft.com/en-us/azure/search/search-howto-run-reset-indexers?tabs=portal
     curl -X POST "${base_url}/indexers/${index_name}-indexer/run?api-version=${api_version}" \
         -H "Content-Type: application/json" \
-        -H "Authorization: Bearer ${token}" \
+        -H "api-key: ${search_service_key}" \
         --data ''
     echo ">>> Triggering to run indexer completed"
     ;;

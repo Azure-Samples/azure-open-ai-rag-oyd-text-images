@@ -3,6 +3,16 @@ title: Use Case Overview
 # date: 2021-12-19
 ---
 
+A newly hired customer service representative, Alex, works for a tech company that provides software solutions. Alex often receives complex queries from customers about troubleshooting issues, software features, and usage guidelines. The company has a comprehensive PDF manual that includes text instructions, screenshots, and diagrams.  To enrich Alex’s onboarding and to provide a better customer experience, the company wants to create a Customer Service Copilot.
+ 
+**Solution Criteria**:
+- Ability to quickly find and retrieve precise information from large documents, including text and images, to answer customer queries efficiently
+- An intuitive and easy-to-use interface that allows reps to input queries and receive comprehensive answers, including visual aids like screenshots and diagrams.
+
+Clear citations and references to the original document sections, ensuring the information provided can be easily verified and trusted by both the representative and the customer.
+
+---
+
 In today's era of Generative AI, customers can unlock valuable insights from their unstructured or structured data to drive business value. By infusing AI into their existing or new products, customers can create powerful applications, which puts the power of AI into the hands of their users. For these Generative AI applications to work on customers data, implementing efficient RAG (Retrieval augment generation) solution is key to make sure the right context of the data is provided to the LLM based on the user query.
 
  

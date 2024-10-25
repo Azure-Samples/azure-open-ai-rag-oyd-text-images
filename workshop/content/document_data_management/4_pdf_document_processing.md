@@ -110,9 +110,9 @@ Run the command below to create the storage account, and storage the function st
 
 ```bash {class="bash-class" id="bash-codeblock" lineNos=inline tabWidt
 random_str=$(tr -dc a-z0-9 </dev/urandom | head -c 13; echo)
-func_storage_account_name="aoairagoyd${random_str}"
+func_storage_account_name="funcaoairag${random_str}"
 az storage account create \
-	--name "funcaoairag${random_str}" \
+	--name "${func_storage_account_name}" \
 	--resource-group "${resource_group_name}" \
 	--location "${region}" \
 	--kind StorageV2 \

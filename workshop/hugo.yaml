@@ -111,7 +111,7 @@ menu:
       weight: 920
     - identifier: references_feedback
       name: Feedback
-      url: /aoai/deploy-2/
+      url: https://github.com/Azure-Samples/azure-open-ai-rag-oyd-text-images/issues/new
       weight: 930
 
   social:
