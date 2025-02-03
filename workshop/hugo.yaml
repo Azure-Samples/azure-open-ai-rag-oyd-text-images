@@ -131,6 +131,7 @@ menu:
 markup:
   highlight:
     style: "dracula"
+    # noClasses: false
   goldmark:
     renderer: 
       unsafe: true

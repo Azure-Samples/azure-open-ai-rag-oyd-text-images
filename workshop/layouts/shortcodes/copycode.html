@@ -49,7 +49,7 @@
       window.copyCodeInitialized = true;  
   
       function copyCode(button) {  
-        const codeBlock = button.nextElementSibling.querySelector('code');  
+        const codeBlock = button.nextElementSibling.querySelector('code');
         if (!codeBlock) {  
           console.error('No code block found!');  
           return;  
@@ -99,5 +99,5 @@
   <button class="copy-button" aria-label="Copy code" onclick="copyCode(this)">  
     📋 Copy  
   </button>  
-  <pre><code class="{{ .Get "lang" | default "language-none" }}">{{ .Inner | safeHTML }}</code></pre>  
+  <pre><code class="language-{{ .Get "lang" | default "none" }}" >{{ .Inner | safeHTML }}</code></pre>  
 </div>  

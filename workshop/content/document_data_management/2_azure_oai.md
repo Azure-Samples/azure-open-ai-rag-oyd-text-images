@@ -22,7 +22,7 @@ title: Deploying Azure OpenAI resource and models
 
 We will start by creating an **Azure OpenAI resource** in the new resource group you created in the [Prerequisites](/azure-open-ai-rag-oyd-text-images/prerequisites#create-azure-resource-group) section. Please run the following command to create the resource:  
 
-```bash {class="bash-class" id="bash-codeblock" lineNos=inline tabWidth=2}
+<!-- ```bash {class="bash-class" id="bash-codeblock" lineNos=inline tabWidth=2}
 az cognitiveservices account create \
   --name "${resource_group_name}" \
   --resource-group "${resource_group_name}" \
@@ -30,7 +30,7 @@ az cognitiveservices account create \
   --kind OpenAI \
   --sku s0 \
   --yes
-```
+``` -->
 
 {{< copycode lang="bash" >}}
 az cognitiveservices account create \
@@ -50,14 +50,16 @@ Let's verify that  Azure OpenAI Service resource was created successfully. Navig
 
 Run the command below to get the URL to the resource group you created prior.
 
-```bash {class="bash-class" id="bash-codeblock" lineNos=inline tabWidth=2}
+{{< copycode lang="bash" >}}
+
 domain=$(az rest --method get --url https://graph.microsoft.com/v1.0/domains --query 'value[?isDefault].id' -o tsv)
 subscription_id=$(az account show | jq -r .id)
 url="https://ms.portal.azure.com/#@${domain}/resource/subscriptions/${subscription_id}/resourceGroups/${resource_group_name}/overview"
 
 # URL to the Azure resource group to see the created resources in it.
 echo "${url}"
-```
+{{< /copycode >}}
+
 </details>
 
 ![alt](../../images/document_data_management_2_azure_oai_1.png)
