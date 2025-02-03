@@ -4,19 +4,34 @@ title: Welcome to the AI Workshop
 
 # Welcome to the AI Workshop 👋
 
-## RAG On PDF With Text And Embedded Images, With Citations Referencing Image Answering User Query
+## Building a Retrieval-Augmented Generation (RAG) On PDF With Text And Embedded Images, With Citations Referencing Image Answering User Query
 
-<!-- In today's workshop you will learn how to use Azure OpenAI and Azure AI Search to build a Retrieval-Augmented Generation (RAG) application with your own data. By offloading AI Search communication to Azure OpenAI, this solution not only enhances text-based queries but also provides a powerful way to identify and retrieve relevant images based on the user's query. This capability ensures that your query responses are enriched with relevant visual content whenever available. -->
-
-In this self-paste workshop you will learn about some of the key Azure services to build an application with Retrieval-Augmented Generation (RAG) capabilities on your PDF documents with text and embedded Images, with citations referencing image answering user query.
-
----
-
-+ Skillset: Level 200
-+ Audience: Architects and Engineers
-+ Workshop duration: ~3 hours
-
-Throughout the labs you will see **Get help!**, expendable section such as one below as example, that offers additional help to get through a given step. Try to not use those to the extend possible, as it will yied figuring things out on your own, but absolutely do use them if you're really stuck and can make progress. Try it out by clicking at it!
+In this self-paced workshop, you will explore key **Azure services** to build an application with **Retrieval-Augmented Generation (RAG)** capabilities. The solution will enable you to work with **PDF documents** containing text and embedded images, providing responses to user queries with proper **citations referencing images**.  
+  
+---  
+  
+### Workshop Details:  
+- **Skillset Level**: 200+    
+- **Audience**: Architects and Engineers    
+- **Duration**: ~3 hours    
+  
+---  
+  
+### What You Will Learn:  
+Throughout this workshop, you will gain hands-on experience with Azure services to:  
+1. Extract and process text and images from PDF documents.    
+2. Implement a Retrieval-Augmented Generation (RAG) solution to enhance query responses.    
+3. Provide citations for images and text in the responses to user queries.    
+  
+---  
+  
+### Navigating the Labs:  
+As you progress through the labs, you'll come across **Get help!** expandable sections like the one shown below. These sections provide additional guidance to help you complete each step.    
+  
+- **Pro Tip**: Try to solve the steps independently as much as possible—this will help you develop problem-solving skills and deepen your understanding.    
+- However, if you're stuck or unable to make progress, feel free to click on the **Get help!** sections for assistance.    
+  
+Go ahead and try it out by clicking on one of these expandable sections!  
 
 <details><summary><b>Get help!</b></summary>Help text</details>
 

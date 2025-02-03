@@ -28,7 +28,7 @@ title: Prerequisites
     + [Azure App Service](https://learn.microsoft.com/en-us/azure/app-service/overview) & [Azure Functions](https://learn.microsoft.com/en-us/azure/azure-functions/functions-overview)
     + [Azure Monitor Application Insights](https://learn.microsoft.com/en-us/azure/azure-monitor/app/app-insights-overview)
 + [Azure CLI](https://learn.microsoft.com/cli/azure/install-azure-cli) 
-  + **Note**: Ensure the az bicep extension is installed. You can install it by running:
+  + **Note**: Ensure the **az bicep extension** is installed. You can install it by running:
   {{< copycode lang="bash" >}}
 az bicep install
 {{< /copycode >}}
@@ -46,7 +46,7 @@ If you're on Windows, install:
   + [Docker](https://docs.docker.com/engine/install/ubuntu/) installed inside Ubuntu
   + [Git](https://git-scm.com/downloads) installed inside Ubuntu
 
-From this point on, all steps and commands will be executed assuming you're using Unix-based OS. Please open an Ubuntu terminal to continue.
+From this point forward, all steps and commands in this workshop will assume you are working on a **Unix-based operating system**. If you are using Windows, please open an **Ubuntu terminal** and ensure your environment is ready to execute the commands provided in the upcoming sections. 
 
 ---
 
@@ -67,7 +67,9 @@ cd azure-open-ai-rag-oyd-text-images
 
 ## Build docker image
 
-This repository comes with a Dockerfile what builds a Docker image with all tools you'll need to successfully be able to follow this workshop.
+This repository includes a **Dockerfile** that builds a Docker image containing all the necessary tools and dependencies required to successfully complete this workshop. Using this Docker image ensures a consistent and hassle-free environment for following the steps. 
+
+To build the Docker image for this workshop, run the following command in the terminal.
 
 {{< copycode lang="bash" >}}
 bash ./helper.sh docker-build
@@ -75,7 +77,7 @@ bash ./helper.sh docker-build
 
 ## Run docker container
 
-Now that the docker image is build, run the container from this image. This image will create a docker volume so your Azure token is shared into the container. This will allow to run further command inside the container and create Azure resources in your Azure subsciption.
+Now that the Docker image is built, you can run a container from this image. The container is configured to use a Docker volume to share your **Azure authentication token** between your local environment and the container. This setup enables you to execute commands inside the container and create Azure resources within your Azure subscription seamlessly.  
 
 {{< copycode lang="bash" >}}
 bash ./helper.sh docker-run
@@ -83,7 +85,7 @@ bash ./helper.sh docker-run
 
 ## Exec into the docker container
 
-Lastly, exec into docker container. Going forward, please run all the commands from within the container throughout this workshop.
+Finally, access the Docker container interactively. From this point forward, all commands and steps for the workshop should be executed **inside the Docker container**.
 
 {{< copycode lang="bash" >}}
 bash ./helper.sh docker-exec
@@ -99,11 +101,9 @@ pwd
 
 ## Set environment variables
 
-To make the workshop smoother, we'll use a local file **helper.sh** to collect and load environment variable that we'll cake use of throughout the workshop.
+To streamline the workshop, we'll use a local file named **helper.sh** to gather and load environment variables that will be utilized throughout the session. Load the default environment variables to get started.
 
-Load the default environment variables.
-
-> Note: If you close your terminal (aka exit the docker container) and open a new one, you have to re-run the command again to load the environment variables.
+> Note: If you close your terminal (i.e., exit the Docker container) and open a new one, you'll need to re-run the command to reload the environment variables.
 
 {{< copycode lang="bash" >}}
 source helper.sh
@@ -119,7 +119,7 @@ echo "${region}"
 
 ## Create Azure resource group
 
-Create a resource group in which all the resources in this workshop will be deployed.
+Create an Azure resource group to host all the resources required for this workshop.
 
 {{< copycode lang="bash" >}}
 az group create --name "${resource_group_name}" --location "${region}"

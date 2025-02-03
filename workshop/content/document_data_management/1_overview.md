@@ -2,11 +2,11 @@
 title: 'Document Data Management: Overview'
 ---
 
-This section of th eworkhsop focuses on building out the Document Data Management conponent.
+This section of the workshop is dedicated to developing the Document Data Management component.
  
 ### Solution Overview
 
-[Azure OpenAI Service](https://learn.microsoft.com/en-us/azure/ai-services/openai/overview) provides REST API access to OpenAI's powerful language models including GPT-4o, GPT-4o mini, GPT-4 Turbo with Vision, GPT-4, GPT-3.5-Turbo, and Embeddings model series. These models can be easily adapted to your specific task including but not limited to content generation, summarization, image understanding, semantic search, and natural language to code translation.
+[Azure OpenAI Service](https://learn.microsoft.com/en-us/azure/ai-services/openai/overview) provides REST API access to OpenAI's powerful language models including o3-mini, o1, GPT-4o with Vision, GPT-4o mini, and Embeddings model series. These models can be easily adapted to your specific task including but not limited to content generation, summarization, image understanding, semantic search, and natural language to code translation.
 
 
 [Azure AI Search](https://learn.microsoft.com/en-us/azure/search/search-what-is-azure-search) provides secure information retrieval at scale over user-owned content in traditional and generative AI search applications. Information retrieval is foundational to any app that surfaces text and vectors. Common scenarios include catalog or document search, data exploration, and increasingly feeding query results to prompts based on your proprietary grounding data for conversational and copilot search. 
@@ -15,11 +15,17 @@ This section of th eworkhsop focuses on building out the Document Data Managemen
 
 [Azure Functions](https://learn.microsoft.com/en-us/azure/azure-functions/functions-overview) is a serverless solution that allows you to write less code, maintain less infrastructure, and save on costs. Instead of worrying about deploying and maintaining servers, the cloud infrastructure provides all the up-to-date resources needed to keep your applications running. 
 
-In this solution, we leverage Azure OpenAI models for text generation and embeddings, Azure AI Search for information retrieval grounded in our data, Azure Blob for storing raw PDF files and the prepared data utilized by Azure AI Search for efficient data retrieval, and Azure Functions as a serverless component to prepare the data for populating the Azure AI Search index. 
+
+This solution utilizes several Azure services working together to enable efficient document management and retrieval:  
+  
+- **Azure OpenAI Models**: Used for text generation and creating embeddings.    
+- **Azure AI Search**: Handles information retrieval, ensuring query results are grounded in your proprietary data.    
+- **Azure Blob Storage**: Stores raw PDF files and the processed data used by Azure AI Search for efficient retrieval.    
+- **Azure Functions**: Acts as a serverless component to process and prepare data for indexing in Azure AI Search.  
 
 ---
 
-This diagram illustrates the process from PDF upload and vectorization to data being indexed in Azure AI Search, making it ready to handle query requests.
+The following diagram illustrates the end-to-end process, starting from **PDF upload and vectorization** to **data indexing in Azure AI Search**, where it becomes ready to handle query requests effectively.  
 
 ![alt](https://github.com/Azure-Samples/azure-open-ai-rag-oyd-text-images/blob/workshop/docs/ArchOverview-Data-Mgmt-v2.png?raw=true)
 

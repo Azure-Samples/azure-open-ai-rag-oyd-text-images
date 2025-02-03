@@ -1,66 +1,111 @@
 ---
-title: Use Case Overview
+title: 'Use Case Overview: Building a Customer Service Copilot Using a RAG Solution with PDF Data'
 # date: 2021-12-19
 ---
 
-A newly hired customer service representative, Alex, works for a tech company that provides software solutions. Alex often receives complex queries from customers about troubleshooting issues, software features, and usage guidelines. The company has a comprehensive PDF manual that includes text instructions, screenshots, and diagrams.  To enrich Alex’s onboarding and to provide a better customer experience, the company wants to create a Customer Service Copilot.
- 
-**Solution Criteria**:
-- Ability to quickly find and retrieve precise information from large documents, including text and images, to answer customer queries efficiently
-- An intuitive and easy-to-use interface that allows reps to input queries and receive comprehensive answers, including visual aids like screenshots and diagrams.
+## Scenario Overview  
+  
+Alex, a newly hired customer service representative at a tech company, is tasked with addressing complex customer queries related to software troubleshooting, features, and usage guidelines. The company has a **comprehensive PDF manual** containing text instructions, screenshots, and diagrams. To empower Alex and provide an enhanced customer experience, the company plans to create a **Customer Service Copilot**.  
+  
+### **Solution Criteria**  
+To meet the needs of both Alex and the customers, the solution must include the following capabilities:  
+  
+1. **Efficient Information Retrieval**    
+   - The ability to quickly locate and retrieve precise information from large documents, including both **text** and **images**, to effectively answer customer queries.    
+  
+2. **Intuitive and User-Friendly Interface**    
+   - A simple interface where representatives can input queries and receive **comprehensive responses**, which include visual aids such as screenshots and diagrams.    
+  
+3. **Trustworthy Citations**    
+   - Clear references to the original sections of the document, ensuring that the provided information is easily verifiable and trusted by both the representative and the customer.  
+  
+---  
+  
+## Leveraging Generative AI for Customer Service  
+  
+In today’s era of **Generative AI**, businesses can extract valuable insights from their structured and unstructured data to drive innovation and improve customer experience. By integrating AI into their products, companies can create powerful applications that enable users to access the full potential of their data.  
+  
+### **The Importance of RAG (Retrieval-Augmented Generation)**  
+For Generative AI applications to work effectively with customer data, implementing a **RAG (Retrieval-Augmented Generation)** solution is crucial. RAG ensures that the **right context** is provided to the **Large Language Models (LLMs)** based on the user’s query. This is particularly important when dealing with large, unstructured documents like PDFs that include both text and visual elements.  
+  
+---  
+  
+## Challenges in Parsing PDF Data for RAG Solutions  
+  
+Many companies rely on PDFs that include text, images, and diagrams containing critical information. However, parsing this content and maintaining relationships between text and visual elements presents several challenges:  
+  
+1. **Text and Image Relationship**    
+   - Extracting images and their associated text while maintaining their contextual relationship is difficult but essential for providing accurate answers.    
+  
+2. **Image Referencing in Citations**    
+   - Including images as part of the citations in LLM-generated outputs is challenging if the images are not properly extracted or retrievable.  
+  
+---  
+  
+## Addressing the Challenges: A RAG Solution for PDF Data  
+  
+To overcome these challenges, we propose a simple architecture to build a **RAG application** that ensures both text and image content from PDFs are searchable, retrievable, and referenced accurately in LLM-generated outputs. This solution maintains the relationship between the textual context and the extracted visual content, enabling the following features:  
+  
+1. **Seamless Extraction of Text and Images**    
+   - Ensures all relevant information, including embedded figures (screenshots, diagrams, etc.), is extracted and indexed for retrieval.  
+  
+2. **Citations with Visual References**    
+   - Provides clear and verifiable citations, including references to extracted images when they are part of the answer.  
+  
+3. **LLM Integration for Enhanced Query Responses**    
+   - Combines the power of retrieval-augmented generation with LLMs to provide rich, contextual answers based on the user’s query.  
+  
+---  
+  
+## Proposed Architecture  
+  
+The architecture focuses on building a RAG application specifically designed for PDF data. Key components include:  
+  
+1. **Data Ingestion**    
+   - Upload and process PDF documents, extracting both text and visual elements while maintaining their relationships.  
+  
+2. **Data Storage and Indexing**    
+   - Store the extracted content in a format optimized for retrieval, ensuring both text and images are searchable.  
+  
+3. **Azure OpenAI Service for LLM Integration**    
+   - Use **Azure OpenAI Service** to integrate advanced **Large Language Models (LLMs)** like GPT-4 for generating answers to user queries. These models leverage both textual and visual data retrieved from the indexed PDF content to provide comprehensive and contextual responses.  
+  
+4. **Search and Retrieval Layer**    
+   - Implement **Azure AI Search** to enable efficient retrieval of information. This layer ensures that both text and images are indexed and retrievable based on the context of the user’s query.    
+   - The search layer supports traditional keyword-based and vector-based queries for accurate matching.  
+  
+5. **Serverless Data Processing**    
+   - Use **Azure Functions** to preprocess and extract content from PDFs, ensuring a seamless pipeline for text and image extraction. This ensures the extracted data is ready for indexing and retrieval.    
+  
+6. **User Interface**    
+   - Build an intuitive user interface (UI) where customer service representatives like Alex can input queries and receive detailed responses.    
+   - The UI displays both textual responses and visual aids (e.g., screenshots, diagrams) along with clear citations to the source sections in the PDF.  
 
-Clear citations and references to the original document sections, ensuring the information provided can be easily verified and trusted by both the representative and the customer.
+---  
+  
+## Benefits of the Solution  
+  
+This RAG-based solution offers several key benefits:  
+  
+1. **Improved Customer Experience**    
+   - By providing quick, accurate, and visually enriched responses, the copilot helps Alex deliver better support to customers.  
+  
+2. **Efficient Onboarding**    
+   - New representatives like Alex can quickly become productive by relying on the copilot to handle complex queries.  
+  
+3. **Trustworthy Information**    
+   - Clear citations ensure that both representatives and customers can trust the answers, as they are directly linked to the original document.  
+  
+4. **Scalability**    
+   - The solution is scalable and can handle large volumes of queries and documents, making it suitable for enterprises of any size.  
 
----
-
-In today's era of Generative AI, customers can unlock valuable insights from their unstructured or structured data to drive business value. By infusing AI into their existing or new products, customers can create powerful applications, which puts the power of AI into the hands of their users. For these Generative AI applications to work on customers data, implementing efficient RAG (Retrieval augment generation) solution is key to make sure the right context of the data is provided to the LLM based on the user query.
-
- 
-
-Customers have PDF documents with text and embedded figures which could be images or diagrams holding valuable information that they would like to use as a context to the LLM to answer a given user query. Parsing those PDFs to implement an efficient RAG solution is challenging, especially when the customer wants to maintain the relationship between the text and extracted image context used to answer the user query.  Also, referencing the image as part of the citation which answers the user query is also challenging if the images are not extracted and are retrievable. This blog post is addressing the challenge of extracting PDF content with text and images as part of the RAG solution, where the relationship between the searchable text context with any of its extracted images is maintained so that the images can be retrieved as references within the citations.
-
- 
-
-Below we outline a simple architecture to build a RAG application on PDF data, where the extracted image content within the PDF is also retrievable as part of the LLM output as part of citation references. 
-
- 
-
-## Workshop Steps to Build the Solution
- 
-
-### 1. Document Data Management
- 
-Step 1.1: Creating Azure OpenAI Chat and Embedding Model
-
-To begin, we utilize Azure OpenAI for text generation and embeddings. By navigating to the Azure portal, we create an Azure OpenAI service and configure it to use models such as GPT-4, GPT-3.5-Turbo, or the Embeddings model series. This setup includes generating the necessary API keys for accessing these powerful language models.
-
-Step 1.2: Creating and Configuring Azure AI Search
-
-Next, we set up Azure AI Search for efficient information retrieval. This involves creating a new Azure AI Search service within the Azure portal and configuring the search index schema to include fields for text chunks and their associated images. Enabling semantic search capabilities further enhances the query processing power of our application.
-
-Step 1.3: Creating Azure Function and Azure Blob
-
-To automate the processing of PDF documents, we set up an Azure Blob Storage account to store both raw and processed PDF data. We then create an Azure Function that triggers upon new PDF uploads to Azure Blob Storage. This function is responsible for splitting PDFs into text chunks, extracting images, and mapping these images to the corresponding text chunks. Once this data is prepared, the function uploads it back to Azure Blob Storage.
-
-Step 1.4: Uploading PDF Document and Running AI Search Indexer
-
-With our Azure Function in place, we upload a sample PDF document to the designated Azure Blob Storage container. The Azure Function processes the document, splitting it into manageable text chunks and extracting images. We then configure and run the Azure AI Search indexer to ingest the prepared data, effectively populating the search index and making the data ready for retrieval.
-
-### 2. Application Runtime
- 
-Step 2.1: Configuring and Running the Demo Application
-
-We proceed by setting up and running a demo application to handle user queries. This involves deploying a server-side AI chatbot application that forwards user queries to Azure OpenAI. The chatbot is integrated with Azure AI Search to retrieve relevant text and images based on the user's query. The application generates responses and sends them back to the client-side interface, ensuring that image citations are included where applicable.
-
-Step 2.2: Extending AI Search Index with Further/Custom Documents
-
-To broaden the scope of our application, we can extend the AI Search index by adding more documents. This involves uploading additional PDF documents to Azure Blob Storage and allowing the Azure Function to process these new documents. Running the AI Search indexer again updates the search index with the new content. We then test the demo application to confirm that it can retrieve information from the extended index, ensuring a robust and scalable solution.
-
-### 3. Chat History
- 
-Step 3.1: Extending the Solution by Adding User Chat History Functionality
-
-To enhance the application further, we can implement a feature to store and retrieve user chat history. This involves setting up a database, such as Azure Cosmos DB, to log each user interaction, including their queries and the corresponding responses. We modify the server-side AI chatbot application to save this interaction data and provide an interface in the client-side application for users to view their chat history. This ensures that past interactions are accessible, providing context for future queries and enhancing the overall user experience.
+---  
+  
+## Conclusion  
+  
+By leveraging **Azure OpenAI Service**, **Azure AI Search**, **Azure Blob Storage**, and **Azure Functions**, the proposed architecture delivers a powerful **Customer Service Copilot**. This copilot not only enriches the onboarding process for representatives like Alex but also ensures an exceptional customer experience through efficient and accurate query handling.   
+  
+This approach demonstrates how **Generative AI** and **RAG solutions** can unlock valuable insights from unstructured data, transforming how businesses interact with their data and customers.  
 
 ---
 

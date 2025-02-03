@@ -4,9 +4,9 @@ title: 'Azure Resource Clean Up'
 
 It's always important to **clean up your environment** once you're done working in it. This helps avoid continuing to **incur any cloud costs**. Once you've concluded your testing, run the command below to **delete any Azure resources** that you created during this workshop. 
 
-```bash {class="bash-class" id="bash-codeblock" lineNos=inline tabWidth=2}
+{{< copycode lang="bash" >}}
 bash ./helper.sh cleanup
-```
+{{< /copycode >}} 
 
 Congratulations! You have successfully completed this workshop. Where do you go from here? Well, how about:
 
