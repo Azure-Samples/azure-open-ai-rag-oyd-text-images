@@ -25,7 +25,8 @@ Our first step involves creating an Azure Function App. This app will host the c
 
 Run the command below to create the Azure App Service plan and the Azure Function app, and storage the function app name to the **.env** config file.
 
-```bash {class="bash-class" id="bash-codeblock" lineNos=inline tabWidth=2}
+
+{{< copycode lang="bash" >}}
 appservice_plan_name="${resource_group_name}"
 az appservice plan create \
     --name "${appservice_plan_name}" \
@@ -34,7 +35,7 @@ az appservice plan create \
     --sku B1 \
     --is-linux
 
-random_str=$(tr -dc a-z0-9 </dev/urandom | head -c 13; echo)
+random_str=$(tr -dc a-z0-9 &lt/dev/urandom | head -c 13; echo)
 function_app="${resource_group_name}-${random_str}"
 az functionapp create \
     --name "${function_app}" \
@@ -46,13 +47,21 @@ az functionapp create \
     --assign-identity '[system]' \
     --functions-version 4 \
     --storage-account "${storage_account_name}"
+
 echo function_app="${function_app}" >> .env
-```
+{{< /copycode >}}
 
 Your **.env** file should look as the following:
 
-```bash {class="bash-class" id="bash-codeblock" lineNos=inline tabWidth=2}
-# cat .env
+**Command:**
+
+{{< copycode lang="bash" >}}
+cat .env
+{{< /copycode >}} 
+
+**Example output:**
+
+```bash {class="bash-class" id="bash-codeblock"}
 AZURE_OPENAI_ENDPOINT=<endpoint-url>
 AZURE_OPENAI_KEY=<key-1-value>
 AZURE_OPENAI_CHATGPT_EMBEDDING_DEPLOYMENT=aoai-rag-oyd-embedding
@@ -65,7 +74,7 @@ search_service_key=<primary-admin-key>
 storage_account_name=<storage-account-name>
 subscription_id=<subscription-id>
 function_app=<function-app-name>
-```
+``` 
 
 ## 2. Give Function app access permission
 
@@ -81,7 +90,7 @@ A system identity, is an identity that is created with and managed by the Functi
 
 Run the command below to create the role assignment, scoping the permission only to the one storage account.
 
-```bash {class="bash-class" id="bash-codeblock" lineNos=inline tabWidt
+{{< copycode lang="bash" >}}
 # This is the built-in Storage Blob Data Contributor role.
 # See https://learn.microsoft.com/en-us/azure/role-based-access-control/built-in-roles/storage#storage-blob-data-contributor
 role="ba92f5b4-2d11-453d-a403-e96b0029c9fe"
@@ -100,7 +109,7 @@ az role assignment create \
 	--role "${role}" \
 	--scope "${scope}" \
 	--assignee "${assignee}"
-```
+{{< /copycode >}} 
 
 ## 3. Create Storage Account to host function source code
 
@@ -108,8 +117,8 @@ Before deploying the function code itself, we also need an Azure Storage account
 
 Run the command below to create the storage account, and storage the function storage account name to the **.env** config file.
 
-```bash {class="bash-class" id="bash-codeblock" lineNos=inline tabWidt
-random_str=$(tr -dc a-z0-9 </dev/urandom | head -c 13; echo)
+{{< copycode lang="bash" >}}
+random_str=$(tr -dc a-z0-9 &lt/dev/urandom | head -c 13; echo)
 func_storage_account_name="funcaoairag${random_str}"
 az storage account create \
 	--name "${func_storage_account_name}" \
@@ -119,12 +128,19 @@ az storage account create \
 	--sku Standard_LRS \
 	--identity-type SystemAssigned
 echo func_storage_account_name="${func_storage_account_name}" >> .env
-```
+{{< /copycode >}} 
 
 Your **.env** file should look as the following:
 
-```bash {class="bash-class" id="bash-codeblock" lineNos=inline tabWidth=2}
-# cat .env
+**Command:**
+
+{{< copycode lang="bash" >}}
+cat .env
+{{< /copycode >}} 
+
+**Example output:**
+
+```bash {class="bash-class" id="bash-codeblock"}
 AZURE_OPENAI_ENDPOINT=<endpoint-url>
 AZURE_OPENAI_KEY=<key-1-value>
 AZURE_OPENAI_CHATGPT_EMBEDDING_DEPLOYMENT=aoai-rag-oyd-embedding
@@ -138,7 +154,7 @@ storage_account_name=<storage-account-name>
 subscription_id=<subscription-id>
 function_app=<function-app-name>
 func_storage_account_name=<func-storage-account-name>
-```
+``` 
 
 ## 4. Configure Function App setting
 
@@ -146,7 +162,7 @@ Once last step, configuring the Function App. The function additionally needs to
 
 Run the command below to configure app settings.
 
-```bash {class="bash-class" id="bash-codeblock" lineNos=inline tabWidth=2}
+{{< copycode lang="bash" >}}
 source .env
 endpoint_suffix="core.windows.net"
 storage_account_key=$(az storage account keys list \
@@ -166,18 +182,18 @@ az functionapp config appsettings set \
         FUNCTIONS_EXTENSION_VERSION="~4" \
         SCM_DO_BUILD_DURING_DEPLOYMENT="true" \
         BLON_STORAGE_CONNECTION="DefaultEndpointsProtocol=https;AccountName=${storage_account_name};EndpointSuffix=${endpoint_suffix};AccountKey=${storage_account_key}"
-```
+{{< /copycode >}} 
 
 ## 5. Publish the function app
 
 We're finally ready to publish the function itself! Run the command below to publish the function.
 
-```bash {class="bash-class" id="bash-codeblock" lineNos=inline tabWidth=2}
+{{< copycode lang="bash" >}}
 (cd ./azure-function;
 func azure functionapp publish \
     "${function_app}"
 )
-```
+{{< /copycode >}} 
 
 Let's validate that the function was published successfully. Open the Function app and under **Functions** section observe the there is a function present with the name **split_pdf**. Further, observe that it has **Blob** trigger.
 

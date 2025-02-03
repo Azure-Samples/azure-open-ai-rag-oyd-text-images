@@ -12,9 +12,9 @@ The git repository comes with a small sample PDF document, a snipped from our Az
 
 Run the command below to upload the sample PDF document.
 
-```bash {class="bash-class" id="bash-codeblock" lineNos=inline tabWidth=2}
+{{< copycode lang="bash" >}}
 bash ./helper.sh upload-pdf
-```
+{{< /copycode >}} 
 
 Let's validate that the PDF was indeed uploaded to the storage account. Open the storage account and
 
@@ -28,9 +28,9 @@ Observe that there is **raw_data** directory. Now click at the directory and val
 
 If you're unsure which storage account it is to look for the PDF document, run the command below!
 
-```bash {class="bash-class" id="bash-codeblock" lineNos=inline tabWidth=2}
+{{< copycode lang="bash" >}}
 echo "${storage_account_name}"
-```
+{{< /copycode >}} 
 </details>
 
 ![alt](../../images/document_data_management_5_populating_azure_ai_index_1.png)
@@ -47,7 +47,7 @@ Go back to the **data** container and open the **prepaired_data** directory. Obs
 
 Click at the **text** directory and observe that there is the **Azure-Kubernetes-Service.json** file. Let's download it and look at the JSON object structure. Run the below command to download the file.
 
-```bash {class="bash-class" id="bash-codeblock" lineNos=inline tabWidth=2}
+{{< copycode lang="bash" >}}
 storage_account_key=$(az storage account keys list \
     --account-name "${storage_account_name}" \
     --resource-group "${resource_group_name}" \
@@ -59,7 +59,7 @@ az storage blob download \
     --container-name data \
     --name "prepaired_data/text/Azure-Kubernetes-Service.json" \
     --account-key "${storage_account_key}" | json_pp
-```
+{{< /copycode >}} 
 
 Observe that the structure of the object is an array and each object there is a content chunk, and an array of image url. Meaning, there could be zero to many images that are mapped to a chunk of text, and an object will be mapped to the object in Azure AI Search index. We'll look at it a bit closer once we populate the index.
 
@@ -77,9 +77,9 @@ Now that we know the prepaired data is ready, we're also to finally run the inde
 
 Run the below command to run the indexer.
 
-```bash {class="bash-class" id="bash-codeblock" lineNos=inline tabWidth=2}
+{{< copycode lang="bash" >}}
 bash ./helper.sh run-indexer
-```
+{{< /copycode >}} 
 
 Let's validate the indexer ran sucessully. Open the Azure AI Search resource and
 

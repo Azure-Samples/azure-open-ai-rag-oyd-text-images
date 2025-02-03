@@ -29,10 +29,9 @@ title: Prerequisites
     + [Azure Monitor Application Insights](https://learn.microsoft.com/en-us/azure/azure-monitor/app/app-insights-overview)
 + [Azure CLI](https://learn.microsoft.com/cli/azure/install-azure-cli) 
   + **Note**: Ensure the az bicep extension is installed. You can install it by running:
-
-  ```bash {class="bash-class" id="bash-codeblock" lineNos=inline tabWidth=2}
-    az bicep install
-    ```
+  {{< copycode lang="bash" >}}
+az bicep install
+{{< /copycode >}}
 
 + [Docker](https://docs.docker.com/engine/install/)
 + [Git](https://git-scm.com/downloads)
@@ -53,49 +52,48 @@ From this point on, all steps and commands will be executed assuming you're usin
 
 ## Login into your Azure Tenant  
 
-```bash {lineNos=inline}
+{{< copycode lang="bash" >}}
 az login --tenant "your-tenant-id-here"
-```
+{{< /copycode >}} 
 
 ## Download workshop repository from GitHub
 
 Clone the repo and cd into project's root directory.
 
-```bash {class="bash-class" id="bash-codeblock" lineNos=inline tabWidth=2}
+{{< copycode lang="bash" >}}
 git clone https://github.com/Azure-Samples/azure-open-ai-rag-oyd-text-images
 cd azure-open-ai-rag-oyd-text-images
-```
+{{< /copycode >}} 
 
 ## Build docker image
 
 This repository comes with a Dockerfile what builds a Docker image with all tools you'll need to successfully be able to follow this workshop.
 
-```bash {class="bash-class" id="bash-codeblock" lineNos=inline tabWidth=2}
+{{< copycode lang="bash" >}}
 bash ./helper.sh docker-build
-```
+{{< /copycode >}} 
 
 ## Run docker container
 
 Now that the docker image is build, run the container from this image. This image will create a docker volume so your Azure token is shared into the container. This will allow to run further command inside the container and create Azure resources in your Azure subsciption.
 
-```bash {class="bash-class" id="bash-codeblock" lineNos=inline tabWidth=2}
+{{< copycode lang="bash" >}}
 bash ./helper.sh docker-run
-```
-
+{{< /copycode >}} 
 
 ## Exec into the docker container
 
 Lastly, exec into docker container. Going forward, please run all the commands from within the container throughout this workshop.
 
-```bash {class="bash-class" id="bash-codeblock" lineNos=inline tabWidth=2}
+{{< copycode lang="bash" >}}
 bash ./helper.sh docker-exec
-```
+{{< /copycode >}} 
 
 Validate you're running inside the docker container. The command **pwd** should return **/home/ubuntu/azure-open-ai-rag-oyd-text-images**.
 
-```bash {class="bash-class" id="bash-codeblock" lineNos=inline tabWidth=2}
+{{< copycode lang="bash" >}}
 pwd
-```
+{{< /copycode >}}
 
 ---
 
@@ -107,15 +105,15 @@ Load the default environment variables.
 
 > Note: If you close your terminal (aka exit the docker container) and open a new one, you have to re-run the command again to load the environment variables.
 
-```bash {class="bash-class" id="bash-codeblock" lineNos=inline tabWidth=2}
+{{< copycode lang="bash" >}}
 source helper.sh
-```
+{{< /copycode >}} 
 
 Validate environment variables are loaded successfully. The command **echo "${region}"** should return **region="eastus"**.
 
-```bash {class="bash-class" id="bash-codeblock" lineNos=inline tabWidth=2}
+{{< copycode lang="bash" >}}
 echo "${region}"
-```
+{{< /copycode >}} 
 
 ---
 
@@ -123,9 +121,9 @@ echo "${region}"
 
 Create a resource group in which all the resources in this workshop will be deployed.
 
-```bash {class="bash-class" id="bash-codeblock" lineNos=inline tabWidth=2}
+{{< copycode lang="bash" >}}
 az group create --name "${resource_group_name}" --location "${region}"
-```
+{{< /copycode >}}
 
 ---
 

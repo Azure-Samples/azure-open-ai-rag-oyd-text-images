@@ -18,21 +18,9 @@ title: Deploying Azure OpenAI resource and models
 
 ## 1. Create and deploy an Azure OpenAI Service resource
 
-<!-- [Let's deploy!!!](https://learn.microsoft.com/en-us/azure/ai-services/openai/how-to/create-resource?pivots=cli) -->
-
 We will start by creating an **Azure OpenAI resource** in the new resource group you created in the [Prerequisites](/azure-open-ai-rag-oyd-text-images/prerequisites#create-azure-resource-group) section. Please run the following command to create the resource:  
 
-<!-- ```bash {class="bash-class" id="bash-codeblock" lineNos=inline tabWidth=2}
-az cognitiveservices account create \
-  --name "${resource_group_name}" \
-  --resource-group "${resource_group_name}" \
-  --location "${region}" \
-  --kind OpenAI \
-  --sku s0 \
-  --yes
-``` -->
-
-{{< copycode lang="bash" >}}
+{{< copycode lang="bash" >}} 
 az cognitiveservices account create \
   --name "${resource_group_name}" \
   --resource-group "${resource_group_name}" \
@@ -41,7 +29,6 @@ az cognitiveservices account create \
   --sku s0 \
   --yes
 {{< /copycode >}}  
- 
 
 Let's verify that  Azure OpenAI Service resource was created successfully. Navigate to Azure portal and open the resource group - observe the Azure OpenAI **aoai-rag-oyd** resource is created.
 
@@ -81,18 +68,28 @@ Open the Azure Open AI resource and:
 
 You should see the **Endpoint** value. Copy the value and paste it into the **.env** file in the project root directory. It should look as the following:
 
+**Command:**
 
-```bash {class="bash-class" id="bash-codeblock" lineNos=inline tabWidth=2}
-# cat .env
+{{< copycode lang="bash" >}}
+cat .env
+{{< /copycode >}} 
+
+**Example output:**
+
+<!-- ```bash {class="bash-class" id="bash-codeblock" lineNos=inline tabWidth=2}
 AZURE_OPENAI_ENDPOINT=<endpoint-url>
-```
+```  -->
+
+```bash {class="bash-class" id="bash-codeblock"}
+AZURE_OPENAI_ENDPOINT=<endpoint-url>
+``` 
 
 <details>
   <summary><b>Get help!</b></summary>
 
 The endpoint value is in the properties object of the Azure OpenAI Service resource. Run the command below to retreive the endpoint URL.
 
-```bash {class="bash-class" id="bash-codeblock" lineNos=inline tabWidth=2}
+{{< copycode lang="bash" >}}
 AZURE_OPENAI_ENDPOINT=$(az cognitiveservices account show \
   --name "${resource_group_name}" \
   --resource-group  "${resource_group_name}" \
@@ -100,25 +97,33 @@ AZURE_OPENAI_ENDPOINT=$(az cognitiveservices account show \
 
 # write the Azure OpenAI endpoint URL to config file
 echo "AZURE_OPENAI_ENDPOINT=${AZURE_OPENAI_ENDPOINT}" >> .env
-```
+{{< /copycode >}}
+
 </details>
 
 ### 2.2 Get the Azure OpenAI API key
 
 On the same **Keys and Endpoint** setting page, you should see the **KEY 1** value. Copy the value and paste it into the **.env** file in the project root directory. Your **.env** file should look as the following:
 
-```bash {class="bash-class" id="bash-codeblock" lineNos=inline tabWidth=2}
-# cat .env
+**Command:**
+
+{{< copycode lang="bash" >}}
+cat .env
+{{< /copycode >}} 
+
+**Example output:**
+
+```bash {class="bash-class" id="bash-codeblock"}
 AZURE_OPENAI_ENDPOINT=<endpoint-url>
 AZURE_OPENAI_KEY=<key-1-value>
-```
+``` 
 
 <details>
   <summary><b>Get help!</b></summary>
 
 The **KEY 1** value is assigned to the **key1** property of the Azure OpenAI Service resource. Run the command below to retreive the endpoint URL.
 
-```bash {class="bash-class" id="bash-codeblock" lineNos=inline tabWidth=2}
+{{< copycode lang="bash" >}}
 AZURE_OPENAI_KEY=$(az cognitiveservices account keys list \
 	--name "${resource_group_name}" \
     --resource-group "${resource_group_name}" \
@@ -126,7 +131,8 @@ AZURE_OPENAI_KEY=$(az cognitiveservices account keys list \
 
 # write the Azure OpenAI key to config file
 echo "AZURE_OPENAI_KEY=${AZURE_OPENAI_KEY}" >> .env
-```
+{{< /copycode >}} 
+
 </details>
 
 
@@ -138,7 +144,7 @@ Azure AI search depends on the Azure Open AI embedding model to convert plain te
 
 To create an embedding model, run the comand below.
 
-```bash {class="bash-class" id="bash-codeblock" lineNos=inline tabWidth=2}
+{{< copycode lang="bash" >}}
 az cognitiveservices account deployment create \
 	--name "${resource_group_name}" \
 	--resource-group  "${resource_group_name}" \
@@ -148,14 +154,14 @@ az cognitiveservices account deployment create \
 	--model-format OpenAI \
 	--sku-capacity "1" \
 	--sku-name "Standard"
-```
+{{< /copycode >}} 
 
 Let's validate that the embedding model was created successfully. Open the Azure OpenAi Studio in the left navigation bar, under **Shared resources**, click **Deployments**.
 
 <details>
   <summary><b>Get help!</b></summary>
 
-```bash {class="bash-class" id="bash-codeblock" lineNos=inline tabWidth=2}
+{{< copycode lang="bash" >}}
 id=$(az cognitiveservices account deployment show \
 	--name "${resource_group_name}" \
 	--resource-group "${resource_group_name}" \
@@ -165,7 +171,8 @@ url="https://oai.azure.com/resource/deployments?wsid=${id}"
 
 # URL to the Azure OpenAI Studio deployments view.
 echo "${url}"
-```
+{{< /copycode >}} 
+
 </details>
 
 
@@ -173,26 +180,34 @@ echo "${url}"
 
 We also need the embedding model and deployment name for later for Azure AI Search to have the permissions to call it during the indexing process. Also the demo application will need the deployment name as part of the configuration to configure the Azure OpenAI. Run the following command to add those to the **.env** file.
 
-```bash {class="bash-class" id="bash-codeblock" lineNos=inline tabWidth=2}
+{{< copycode lang="bash" >}}
 echo "AZURE_OPENAI_CHATGPT_EMBEDDING_DEPLOYMENT=${model_deployment_name_embedding}" >> .env
 echo "AZURE_OPENAI_CHATGPT_EMBEDDING_MODEL_NAME=${model_name_embedding}" >> .env
-```
+{{< /copycode >}} 
 
 Your **.env** file should look as the following:
 
-```bash {class="bash-class" id="bash-codeblock" lineNos=inline tabWidth=2}
-# cat .env
+**Command:**
+
+{{< copycode lang="bash" >}}
+cat .env
+{{< /copycode >}} 
+
+**Example output:**
+
+```bash {class="bash-class" id="bash-codeblock"}
 AZURE_OPENAI_ENDPOINT=<endpoint-url>
 AZURE_OPENAI_KEY=<key-1-value>
 AZURE_OPENAI_CHATGPT_EMBEDDING_DEPLOYMENT=aoai-rag-oyd-embedding
 AZURE_OPENAI_CHATGPT_EMBEDDING_MODEL_NAME=<embedding-model-name>
-```
+``` 
+
 
 ### 3.2. Create Azure Open AI chat model
 
 To create a chat model, run the comand below.
 
-```bash {class="bash-class" id="bash-codeblock" lineNos=inline tabWidth=2}
+{{< copycode lang="bash" >}}
 az cognitiveservices account deployment create \
 	--name "${resource_group_name}" \
 	--resource-group  "${resource_group_name}" \
@@ -202,28 +217,36 @@ az cognitiveservices account deployment create \
 	--model-format OpenAI \
 	--sku-capacity "1" \
 	--sku-name "Standard"
-```
+{{< /copycode >}} 
+
 
 Let's validate that the chat model was created successfully. Under the same **Deployments** view, click **refresh** and validate that there chat model is present.
 
 From the chat model, we need the deployment name and api version for later use for deo application to be able to connect to the chat model. Run the following command to add those to the **.env** file.
 
-```bash {class="bash-class" id="bash-codeblock" lineNos=inline tabWidth=2}
+{{< copycode lang="bash" >}}
 echo "AZURE_OPENAI_CHATGPT_DEPLOYMENT=${model_deployment_name_chat}" >> .env
 echo "AZURE_OPENAI_API_VERSION=${model_version_chat}" >> .env
-```
+{{< /copycode >}} 
 
 Your **.env** file should look as the following:
 
-```bash {class="bash-class" id="bash-codeblock" lineNos=inline tabWidth=2}
-# cat .env
+**Command:**
+
+{{< copycode lang="bash" >}}
+cat .env
+{{< /copycode >}} 
+
+**Example output:**
+
+```bash {class="bash-class" id="bash-codeblock"}
 AZURE_OPENAI_ENDPOINT=<endpoint-url>
 AZURE_OPENAI_KEY=<key-1-value>
 AZURE_OPENAI_CHATGPT_EMBEDDING_DEPLOYMENT=aoai-rag-oyd-embedding
 AZURE_OPENAI_CHATGPT_EMBEDDING_MODEL_NAME=<embedding-model-name>
 AZURE_OPENAI_CHATGPT_DEPLOYMENT=aoai-rag-oyd-chat
 AZURE_OPENAI_API_VERSION=<chat-model-api-version>
-```
+``` 
 
 ## 4. (Optional) Try the chat model in Azure OpenAI Studio playground
 

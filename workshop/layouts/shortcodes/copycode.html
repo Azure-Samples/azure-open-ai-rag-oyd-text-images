@@ -95,9 +95,10 @@
 {{ end }}  
   
 <!-- Code block with copy button -->  
-<div class="code-wrapper">  
-  <button class="copy-button" aria-label="Copy code" onclick="copyCode(this)">  
+<div class="code-wrapper" >  
+  <button class="copy-button" aria-label="Copy code" onclick="copyCode(this)" >  
     📋 Copy  
   </button>  
-  <pre><code class="language-{{ .Get "lang" | default "none" }}" >{{ .Inner | safeHTML }}</code></pre>  
+  <pre><code class="highlight language-{{ .Get "lang" | default "none" }}" >{{ .Inner | safeHTML }}</code></pre> 
+
 </div>  

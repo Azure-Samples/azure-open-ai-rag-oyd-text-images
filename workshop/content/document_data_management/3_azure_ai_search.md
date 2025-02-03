@@ -15,9 +15,9 @@ title: Deploying Azure AI Search resource and configuring the search index
 
 ## 1. Create and deploy an Azure OpenAI Service resource
 
+{{< copycode lang="bash" >}}
+random_str=$(tr -dc a-z0-9 &lt/dev/urandom | head -c 13; echo)
 
-```bash {class="bash-class" id="bash-codeblock" lineNos=inline tabWidth=2}
-random_str=$(tr -dc a-z0-9 </dev/urandom | head -c 13; echo)
 search_service_name="${resource_group_name}-${random_str}"
 az search service create \
 	--name "${search_service_name}" \
@@ -30,8 +30,7 @@ az search service create \
 
 # add search service name to the .env config file
 echo search_service_name="${search_service_name}" >> .env
-```
-
+{{< /copycode >}} 
 
 Before we can configure Azure AI Search, we need to add additional data to your **.env** configuration file. 
 
@@ -39,8 +38,8 @@ Navigate to Azure AI Search resource you just created and:
 
 - Copy the **Url** and add to the **.env** file as
 
-	```bash {class="bash-class" id="bash-codeblock" lineNos=inline tabWidth=2}
-		base_url=<url>
+	```bash {class="bash-class" id="bash-codeblock"}
+	base_url=<url>
 	```
 ![alt](../../images/document_data_management_3_azure_ai_search_1.png)
 
@@ -50,17 +49,17 @@ Navigate to Azure AI Search resource you just created and:
 
 Run the command below to get the URL to the resource group you created prior.
 
-```bash {class="bash-class" id="bash-codeblock" lineNos=inline tabWidth=2}
+{{< copycode lang="bash" >}}
 base_url="https://${search_service_name}.search.windows.net"
 echo "base_url=${base_url}" >> .env
-```
+{{< /copycode >}} 
 </details>
 
 
 - In the left navigation bar, click **Settings** and after click **Keys**. Copy the **Primary admin key** and add to the **.env** file as
 
-	```bash {class="bash-class" id="bash-codeblock" lineNos=inline tabWidth=2}
-		search_service_key=<primary-admin-key>
+	```bash {class="bash-class" id="bash-codeblock"}
+	search_service_key=<primary-admin-key>
 	```
 
 ![alt](../../images/document_data_management_3_azure_ai_search_2.png)
@@ -70,20 +69,27 @@ echo "base_url=${base_url}" >> .env
 
 Run the command below to get the URL to the resource group you created prior.
 
-```bash {class="bash-class" id="bash-codeblock" lineNos=inline tabWidth=2}
+{{< copycode lang="bash" >}}
 search_service_key=$(az search admin-key show \
 	--service-name ${search_service_name} \
 	--resource-group ${resource_group_name} \
 	| jq -r .primaryKey)
 
 echo "search_service_key=${search_service_key}" >> .env
-```
+{{< /copycode >}} 
 </details>
 
 Your **.env** file should look as the following:
 
-```bash {class="bash-class" id="bash-codeblock" lineNos=inline tabWidth=2}
-# cat .env
+**Command:**
+
+{{< copycode lang="bash" >}}
+cat .env
+{{< /copycode >}} 
+
+**Example output:**
+
+```bash {class="bash-class" id="bash-codeblock"}
 AZURE_OPENAI_ENDPOINT=<endpoint-url>
 AZURE_OPENAI_KEY=<key-1-value>
 AZURE_OPENAI_CHATGPT_EMBEDDING_DEPLOYMENT=aoai-rag-oyd-embedding
@@ -93,7 +99,7 @@ AZURE_OPENAI_API_VERSION=<chat-model-api-version>
 search_service_name=<service-name>
 base_url=<url>
 search_service_key=<primary-admin-key>
-```
+``` 
 
 ## 2. Creating Azure Storage Account
 
@@ -101,8 +107,8 @@ Before we can configure Azure AI Search, we need to create an Azure Storage Acco
 
 Run the command below to create the storage account, and storage the storage account name to the **.env** config file.
 
-```bash {class="bash-class" id="bash-codeblock" lineNos=inline tabWidth=2}
-random_str=$(tr -dc a-z0-9 </dev/urandom | head -c 13; echo)
+{{< copycode lang="bash" >}}
+random_str=$(tr -dc a-z0-9 &lt/dev/urandom | head -c 13; echo)
 storage_account_name="aoairagoyd${random_str}"
 az storage account create \
 	--name "aoairagoyd${random_str}" \
@@ -113,12 +119,19 @@ az storage account create \
 	--identity-type SystemAssigned
 
 echo storage_account_name="${storage_account_name}" >> .env
-```
+{{< /copycode >}} 
 
 Your **.env** file should look as the following:
 
-```bash {class="bash-class" id="bash-codeblock" lineNos=inline tabWidth=2}
-# cat .env
+**Command:**
+
+{{< copycode lang="bash" >}}
+cat .env
+{{< /copycode >}} 
+
+**Example output:**
+
+```bash {class="bash-class" id="bash-codeblock"}
 AZURE_OPENAI_ENDPOINT=<endpoint-url>
 AZURE_OPENAI_KEY=<key-1-value>
 AZURE_OPENAI_CHATGPT_EMBEDDING_DEPLOYMENT=aoai-rag-oyd-embedding
@@ -129,11 +142,11 @@ search_service_name=<service-name>
 base_url=<url>
 search_service_key=<primary-admin-key>
 storage_account_name=<storage-account-name>
-```
+``` 
 
 Lastly, create a storage account container from where Azuer AI Search will be pulling the prepaired data from.
 
-```bash {class="bash-class" id="bash-codeblock" lineNos=inline tabWidth=2}
+{{< copycode lang="bash" >}}
 # Get storage account key for authorization
 storage_account_key=$(az storage account keys list \
 	--account-name "${storage_account_name}" \
@@ -144,7 +157,8 @@ az storage container create \
 	--name "${container_name}" \
 	--account-name "${storage_account_name}" \
 	--account-key "${storage_account_key}"
-```
+{{< /copycode >}} 
+
 
 ## 3. Configuring Azure AI Search
 
@@ -164,15 +178,22 @@ A skillset is a reusable object in Azure AI Search that's attached to an indexer
 
 Before we can start creating the data source, we need to add your subscription id to the **.env** configuration file. Run the command below to the subscription id.
 
-```bash {class="bash-class" id="bash-codeblock" lineNos=inline tabWidth=2}
+{{< copycode lang="bash" >}}
 subscription_id=$(az account show | jq -r .id)
 echo "subscription_id=${subscription_id}" >> .env
-```
+{{< /copycode >}} 
 
 Your **.env** file should look as the following:
 
-```bash {class="bash-class" id="bash-codeblock" lineNos=inline tabWidth=2}
-# cat .env
+**Command:**
+
+{{< copycode lang="bash" >}}
+cat .env
+{{< /copycode >}} 
+
+**Example output:**
+
+```bash {class="bash-class" id="bash-codeblock"}
 AZURE_OPENAI_ENDPOINT=<endpoint-url>
 AZURE_OPENAI_KEY=<key-1-value>
 AZURE_OPENAI_CHATGPT_EMBEDDING_DEPLOYMENT=aoai-rag-oyd-embedding
@@ -184,7 +205,7 @@ base_url=<url>
 search_service_key=<primary-admin-key>
 storage_account_name=<storage-account-name>
 subscription_id=<subscription-id>
-```
+``` 
 
 ### 3.1 Create data source
 
@@ -198,15 +219,15 @@ To create the Azure AI Search data source, we'll use:
 
 Feel free open the file to have a closer look, either using the prefer editor of your choice, or by running the following command:
 
-```bash {class="bash-class" id="bash-codeblock" lineNos=inline tabWidth=2}
+{{< copycode lang="bash" >}}
 cat bicep/helpers/datasource.json
-```
+{{< /copycode >}} 
 
 Observe that there is a resemblance between the variables listed above and placeholder values in all caps in the template file. We'll be using a helper funtion, which will replace the placeholder values with values from your **.env** configuration file and create the data source in your Azure AI Search. To create the data source, run the following command below.
 
-```bash {class="bash-class" id="bash-codeblock" lineNos=inline tabWidth=2}
+{{< copycode lang="bash" >}}
 bash ./helper.sh create-ai-search-data-source
-```
+{{< /copycode >}} 
 
 Let's validate that the data source was created successfully. In Azure portal, open the Azure AI Search resource and
 
@@ -229,18 +250,18 @@ To create the Azure AI Search index, we'll use:
 
 Feel free open the file to have a closer look, either using the prefer editor of your choice, or by running the following command:
 
-```bash {class="bash-class" id="bash-codeblock" lineNos=inline tabWidth=2}
+{{< copycode lang="bash" >}}
 cat bicep/helpers/index.json
-```
+{{< /copycode >}} 
 
 Similar to the data source helper function, the above values will be used to replace the placeholder values in the template file.
 
 
 To create the index, run the following command below.
 
-```bash {class="bash-class" id="bash-codeblock" lineNos=inline tabWidth=2}
+{{< copycode lang="bash" >}}
 bash ./helper.sh create-ai-search-index
-```
+{{< /copycode >}} 
 
 Let’s validate that the index was created successfully. Inside the Azure AI Search resource:
 
@@ -282,18 +303,18 @@ To create the Azure AI Search skillset, we'll use:
 
 Feel free open the file to have a closer look, either using the prefer editor of your choice, or by running the following command:
 
-```bash {class="bash-class" id="bash-codeblock" lineNos=inline tabWidth=2}
+{{< copycode lang="bash" >}}
 cat bicep/helpers/skillset.json
-```
+{{< /copycode >}} 
 
 Similar to the previous helper functions, the above values will be used to replace the placeholder values in the template file.
 
 
 To create the skillset, run the following command below.
 
-```bash {class="bash-class" id="bash-codeblock" lineNos=inline tabWidth=2}
+{{< copycode lang="bash" >}}
 bash ./helper.sh create-ai-search-skillset
-```
+{{< /copycode >}} 
 
 Let’s validate that the skillset was created successfully. Inside the Azure AI Search resource:
 
@@ -314,7 +335,7 @@ The Azure OpenAI Embedding skill connects to a deployed embedding model on your 
 
 Before we can create the indexer, we need to give the Azure AI Search system assigned identity the permissions to access the storage blob, so the indexer can pull the data and populate the index. Run the following command to assign built-in Storage Blob Data Reader role.
 
-```bash {class="bash-class" id="bash-codeblock" lineNos=inline tabWidth=2}
+{{< copycode lang="bash" >}}
 # This is the built-in Storage Blob Data Reader role. 
 # See https://learn.microsoft.com/en-us/azure/role-based-access-control/built-in-roles/storage#storage-blob-data-reader
 role="2a2b9908-6ea1-4ae2-8e65-a410df84e7d1"
@@ -333,7 +354,7 @@ az role assignment create \
 	--role "${role}" \
 	--scope "${scope}" \
 	--assignee "${assignee}"
-```
+{{< /copycode >}} 
 
 Now we are ready for the last step in setting up Azure AI Search is to create the indexer. To create the Azure AI Search skillset, we'll use:
 
@@ -346,17 +367,17 @@ Now we are ready for the last step in setting up Azure AI Search is to create th
 
 Feel free open the file to have a closer look, either using the prefer editor of your choice, or by running the following command:
 
-```bash {class="bash-class" id="bash-codeblock" lineNos=inline tabWidth=2}
+{{< copycode lang="bash" >}}
 cat bicep/helpers/indexer.json
-```
+{{< /copycode >}} 
 
 Similar to the previous helper functions, the above values will be used to replace the placeholder values in the template file.
 
 To create the indexer, run the following command below.
 
-```bash {class="bash-class" id="bash-codeblock" lineNos=inline tabWidth=2}
+{{< copycode lang="bash" >}}
 bash ./helper.sh create-ai-search-indexer
-```
+{{< /copycode >}}
 
 Let’s validate that the indexer was created successfully. Inside the Azure AI Search resource:
 

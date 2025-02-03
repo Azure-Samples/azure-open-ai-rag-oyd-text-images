@@ -15,10 +15,9 @@ title: 'Application Runtime: Setting Up Demo App'
 
 We need an **Azure Blob SAS token** so the demo app can pull relevant images whenever they are identified in the query response. Run the following command:
 
-```bash {class="bash-class" id="bash-codeblock" lineNos=inline tabWidth=2}
+{{< copycode lang="bash" >}}
 bash ./helper.sh get-blob-sas
-```
-</details>
+{{< /copycode >}} 
 
 ## Verify Environment Variables
  
@@ -26,13 +25,13 @@ Let’s verify that all necessary variables are set for the demo app to be confi
 
 **Command:**
 
-```bash {class="bash-class" id="bash-codeblock" lineNos=inline tabWidth=2}
+{{< copycode lang="bash" >}}
 cat .env
-```
+{{< /copycode >}} 
 
 **Example output:**
 
-```bash {class="bash-class" id="bash-codeblock" lineNos=inline tabWidth=2}
+```bash {class="bash-class" id="bash-codeblock"}
 AZURE_OPENAI_ENDPOINT=<endpoint-url>
 AZURE_OPENAI_KEY=<key-1-value>
 AZURE_OPENAI_CHATGPT_EMBEDDING_DEPLOYMENT=aoai-rag-oyd-embedding
@@ -53,22 +52,22 @@ sas_token=<azure-blob-sas-token>
 
 Create .env file for the demo app
 
-```bash {class="bash-class" id="bash-codeblock" lineNos=inline tabWidth=2}
+{{< copycode lang="bash" >}}
 bash ./helper.sh create-dot-env-demo-app
-```
+{{< /copycode >}} 
 
 The **.env** file for the demo app is located in the **./demo-app** directory. Run the following command to validate that the file was created successfully and contains all the required variables with assigned values.
 
 
 **Command:**
 
-```bash {class="bash-class" id="bash-codeblock" lineNos=inline tabWidth=2}
-cat ./demo-app/.env
-```
+{{< copycode lang="bash" >}}
+cat .env
+{{< /copycode >}} 
 
 **Example output:**
 
-```bash {class="bash-class" id="bash-codeblock" lineNos=inline tabWidth=2}
+```bash {class="bash-class" id="bash-codeblock"}
 AZURE_OPENAI_ENDPOINT=https://la-openai-test.openai.azure.com/
 AZURE_OPENAI_KEY=ca2195a42c5e4714ac9b2b49bb52aab6
 AZURE_OPENAI_CHATGPT_DEPLOYMENT=test-gpt4o
@@ -86,21 +85,21 @@ BLOB_SAS_TOKEN="<azure-blob-sas-token>"
 
 Install demo app python dependencies
 
-```bash {class="bash-class" id="bash-codeblock" lineNos=inline tabWidth=2}
+{{< copycode lang="bash" >}}
 bash ./helper.sh install-demo-app-dependencies
-```
+{{< /copycode >}} 
 
 ## 4. Start the demo app
 
 Run the demo app.
 
-```bash {class="bash-class" id="bash-codeblock" lineNos=inline tabWidth=2}
+{{< copycode lang="bash" >}}
 bash ./helper.sh run-demo-app
-```
+{{< /copycode >}} 
 
 A clear sign your application is running successfully is when you see output similar to the following:
 
-```bash {class="bash-class" id="bash-codeblock" lineNos=inline tabWidth=2}
+```bash {class="bash-class" id="bash-codeblock"}
 You can now view your Streamlit app in your browser.
 
 Local URL: http://localhost:8501

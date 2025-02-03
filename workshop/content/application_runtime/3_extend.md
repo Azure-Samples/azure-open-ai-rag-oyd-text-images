@@ -7,13 +7,13 @@ In this section, you can truly experiment with the solution by bringing your own
 To extend and include your PDF data in this RAG-based approach, there are three very simple steps:
 
 1. Put your PDF document in this repositories **./sample-documents** directory.
-2. Upload the document to your Azure Blob storage that was provisioned as part of the infrastructure deployment. Make sure instead of **myfile.pdf** you specify your file name
+2. Upload the document to your Azure Blob storage that was provisioned as part of the infrastructure deployment. Make sure instead of **myfile.pdf** you specify your file name.
 
-    ```bash {class="bash-class" id="bash-codeblock" lineNos=inline tabWidth=2}
-    file_name="myfile.pdf" bash ./helper.sh upload-pdf
-    ```
+    {{< copycode lang="bash" >}}
+file_name="myfile.pdf" bash ./helper.sh upload-pdf
+{{< /copycode >}} 
 
-3. Run Azure AI Search indexer to index your document
+3. Run Azure AI Search indexer to index your document.
 
 ## Next Steps  
   
