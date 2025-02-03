@@ -61,15 +61,15 @@ menu:
       weight: 300
     - identifier: apprun_overview
       name: 1. Overview
-      url: /aoai/deploy-2/
+      url: /application_runtime/1_overview/
       weight: 310
     - identifier: apprun_demo_app
       name: 2. Setting Up Demo App
-      url: /aoai/deploy-2/
+      url: /application_runtime/2_setting_up_demo_apps/
       weight: 320
     - identifier: apprun_ext_solution
       name: 3. Extending With Your Own PDF
-      url: /aoai/deploy-2/
+      url: /application_runtime/3_extend/
       weight: 330
     
     - identifier: chat_histroy
@@ -79,12 +79,12 @@ menu:
       weight: 400
     - identifier: chat_histroy_overview
       name: 1. Overview
-      url: /aoai/deploy-2/
+      url: /chat_history/1_overview/
       weight: 410
-    - identifier: chat_histroy_cosmos_db
-      name: 2. Azure Cosmos DB
-      url: /aoai/deploy-2/
-      weight: 420
+    # - identifier: chat_histroy_cosmos_db
+    #   name: 2. Azure Cosmos DB
+    #   url: /chat_history/2_azure_cosmos_db/
+    #   weight: 420
 
     - identifier: cleanup
       name: 'Clean Up'
@@ -93,7 +93,7 @@ menu:
       weight: 500
     - identifier: cleanup_cleanup
       name: Azure Resource Clean Up
-      url: /aoai/deploy-2/
+      url: /clean_up/1_clean_up/
       weight: 510
 
     - identifier: references
@@ -107,7 +107,7 @@ menu:
       weight: 910
     - identifier: references_resources
       name: Further Resources
-      url: /aoai/deploy-2/
+      url: /further_resources/1_further_resources/
       weight: 920
     - identifier: references_feedback
       name: Feedback

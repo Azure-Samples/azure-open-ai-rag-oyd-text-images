@@ -20,7 +20,7 @@ title: Deploying Azure OpenAI resource and models
 
 <!-- [Let's deploy!!!](https://learn.microsoft.com/en-us/azure/ai-services/openai/how-to/create-resource?pivots=cli) -->
 
-We will start of by creating Azure Open AI resource in the new resource group you created in [Prerequisites](/azure-open-ai-rag-oyd-text-images/prerequisites#create-azure-resource-group) section. Please run the following connact to create the resource.
+We will start by creating an **Azure OpenAI resource** in the new resource group you created in the [Prerequisites](/azure-open-ai-rag-oyd-text-images/prerequisites#create-azure-resource-group) section. Please run the following command to create the resource:  
 
 ```bash {class="bash-class" id="bash-codeblock" lineNos=inline tabWidth=2}
 az cognitiveservices account create \
@@ -31,6 +31,17 @@ az cognitiveservices account create \
   --sku s0 \
   --yes
 ```
+
+{{< copycode lang="bash" >}}
+az cognitiveservices account create \
+  --name "${resource_group_name}" \
+  --resource-group "${resource_group_name}" \
+  --location "${region}" \
+  --kind OpenAI \
+  --sku s0 \
+  --yes
+{{< /copycode >}}  
+ 
 
 Let's verify that  Azure OpenAI Service resource was created successfully. Navigate to Azure portal and open the resource group - observe the Azure OpenAI **aoai-rag-oyd** resource is created.
 

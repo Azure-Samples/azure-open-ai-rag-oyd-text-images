@@ -22,10 +22,6 @@ model_deployment_name_chat="${resource_group_name}-chat"
 model_name_chat="gpt-4o"
 model_version_chat="2024-08-06"
 
-get_ai_search_token() {
-  token=$(az account get-access-token --resource=https://search.azure.com --query accessToken --output tsv)
-}
-
 create_ai_search_data_source() {
     echo ">>> Creating AI Search data source"
     echo '{"msg": ">>> creating datasource"}' >> ai_search_logs.jsonl
@@ -202,7 +198,6 @@ case $@ in
   setup-ai-search)
     echo ">>> Setting up AI Search data source, index, indexer, and skillset"
     echo "" > ./bicep/helpers/ai_search_logs.jsonl
-    get_ai_search_token
 
     load_dot_env
     load_dot_env_aoai
