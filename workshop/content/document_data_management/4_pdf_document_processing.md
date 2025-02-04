@@ -11,20 +11,19 @@ title: PDF Document Processing
 
 ---
 
-In this section, we will be learning about PDF document processing. Here’s an overview of the steps we will be taking:
-
-1. **Create an Azure Function App**: This will host the code responsible for the pre-processing tasks, such as breaking down PDFs into smaller text chunks.
-2. **Set Up an Azure Storage Account**: This account will be used to upload and store the source code and other necessary files.
-3. **Publish the Function App**: Once our function app is set up, we will configure it to listen for events in an Azure Blob storage. This will allow the function app to automatically trigger whenever a new PDF is uploaded.
-
-By the end of this session, you'll understand how to set up these components and how they work together to process PDF documents efficiently. 
+In this section, we will learn about PDF document processing. Here’s an overview of the steps:  
+  
+1. **Create an Azure Function App**: Host code for pre-processing tasks like breaking PDFs into smaller text chunks.    
+2. **Set Up an Azure Storage Account**: Upload and store the PDFs, source code, and other necessary files.    
+3. **Publish the Function App**: Configure it to listen to Azure Blob Storage events, triggering automatically when a new PDF is uploaded.    
+  
+By the end of this section, you'll understand how to set up these components to efficiently process PDF documents.  
 
 ## 1. Create Azure Function app
 
-Our first step involves creating an Azure Function App. This app will host the code responsible for pre-processing the PDFs by breaking them down into smaller text chunks. We also need to create an Azure App Service plan, which essentially dectates the pricing tier and therefor  determines what App Service features you get and how much you pay for the plan.
-
-Run the command below to create the Azure App Service plan and the Azure Function app, and storage the function app name to the **.env** config file.
-
+Our first step involves creating an Azure Function App. This app will host the code responsible for pre-processing PDFs by breaking them into smaller text chunks. Additionally, we need to create an Azure App Service plan, which determines the pricing tier and, consequently, the features and cost of the plan.  
+  
+Run the command below to create the Azure App Service plan, the Azure Function App, and store the function app name in the **.env** configuration file: 
 
 {{< copycode lang="bash" >}}
 appservice_plan_name="${resource_group_name}"
@@ -78,13 +77,15 @@ function_app=<function-app-name>
 
 ## 2. Give Function app access permission
 
-The function will need few permissions to do two essential task:
-1. Read PDF from the Azure Blob
-2. After processing, write the text chunks and images from the PDF back to Azure Blob
-
-That means, the function need read/write permission for the specific Azure Storage Account that we use to upload PDF. We will be giving the built-in Storage Blob Data Contributor role to the function app system identity to have those permissions in place.
-
-A system identity, is an identity that is created with and managed by the Function App resource itself. Whenever there is a case to grant permission to a system assigend permissions, you can find the system assign identity ID (e.g. object ID) under the Function app resource -> **Settings** -> **Identity** -> **System assigned**. In our case, we'll use the cli command to retreive the object ID for the role assignment.
+The function will require a few permissions to perform two essential tasks:    
+1. **Read PDFs from Azure Blob Storage.**    
+2. **Write the processed text chunks and images back to Azure Blob Storage.**    
+  
+This means the function needs **read/write permissions** for the specific Azure Storage Account used for uploading PDFs. We will assign the built-in **Storage Blob Data Contributor** role to the function app's **system-assigned identity** to grant these permissions.  
+  
+A **system-assigned identity** is an identity created and managed by the Function App resource itself. Whenever there is a case to grant permission to a system assigend permissions, you can find the system assign identity ID (e.g. object ID) under the Function app resource -> **Settings** -> **Identity** -> **System assigned**. In our case, we'll use the cli command to retreive the object ID for the role assignment.
+  
+In our case, we'll retrieve the Object ID for the role assignment using a CLI command.  
 
 ![alt](../../images/document_data_management_4_pdf_document_processing_1.png)
 
@@ -113,9 +114,9 @@ az role assignment create \
 
 ## 3. Create Storage Account to host function source code
 
-Before deploying the function code itself, we also need an Azure Storage account so we can upload the source code and run remote deployment. Meaning, the code build and deployment will be happening on Azure vs on your local machine.
-
-Run the command below to create the storage account, and storage the function storage account name to the **.env** config file.
+Before deploying the function code, we need to create an Azure Storage Account to upload the source code and perform a remote deployment. This allows the code build and deployment to occur directly on Azure instead of your local machine.  
+  
+Run the command below to create the storage account and save the storage account name in the **.env** configuration file.  
 
 {{< copycode lang="bash" >}}
 random_str=$(tr -dc a-z0-9 &lt/dev/urandom | head -c 13; echo)
@@ -158,7 +159,7 @@ func_storage_account_name=<func-storage-account-name>
 
 ## 4. Configure Function App setting
 
-Once last step, configuring the Function App. The function additionally needs to know the connection string from where to pull the data from (aka raw PDF files).
+One last step is configuring the Function App. The function also needs the connection string for the Azure Storage Account to access the raw PDF files.   
 
 Run the command below to configure app settings.
 
@@ -195,14 +196,24 @@ func azure functionapp publish \
 )
 {{< /copycode >}} 
 
-Let's validate that the function was published successfully. Open the Function app and under **Functions** section observe the there is a function present with the name **split_pdf**. Further, observe that it has **Blob** trigger.
+To validate that the function was published successfully, follow these steps:  
+  
+1. Open the **Function App** in the Azure Portal.  
+2. Navigate to the **Functions** section.  
+3. Verify that a function named **split_pdf** is present.  
+4. Confirm that the function is configured with a **Blob** trigger.  
+  
+If all of the above are correct, the deployment was successful.
 
 ![alt](../../images/document_data_management_4_pdf_document_processing_2.png)
 
 ---
 
-Congratulation! You successfully created the PDF document processing components, and we're ready for the final part of the Document Data Processing - let's upload the PDF document and run the Azure AI Search indexer to populate the index with data!
-
+**Congratulations!** You have successfully created the PDF document processing components. Now, we’re ready for the final step of the Document Data Processing workflow:    
+  
+1. **Upload the PDF document** to the Azure Blob Storage.    
+2. **Run the Azure AI Search indexer** to process the document and populate the search index with the extracted data.    
+  
 ---
 
 [&laquo; Document Data Management: Azure AI Search](/azure-open-ai-rag-oyd-text-images/document_data_management/3_azure_ai_search/) | [Document Data Management: Populating Azure AI Index &raquo;](/azure-open-ai-rag-oyd-text-images/document_data_management/5_populating_azure_ai_index/)

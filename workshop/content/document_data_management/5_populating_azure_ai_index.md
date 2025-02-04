@@ -6,17 +6,18 @@ title: Populating Azure AI Index
 
 ## 1. Upload the PDF document
 
-Befoer we can populate the Azure AI index, we need first to upload a PDF document to the storage account.
-
-The git repository comes with a small sample PDF document, a snipped from our Azure AKS service. You can locate and view the PDF under **./sample-documents/Azure-Kubernetes-Service.pdf**. Later, you will learn how you can index your own PDF documents using this solution, but for now we'll start with this sample PDF.
-
-Run the command below to upload the sample PDF document.
+Before populating the Azure AI index, we first need to upload a PDF document to the Azure Storage Account.    
+  
+The Git repository includes a small sample PDF document, which is a snippet from the Azure AKS service. You can locate and view the PDF at:    
+**./sample-documents/Azure-Kubernetes-Service.pdf**. Later, you’ll learn how to index your own PDF documents using this solution. For now, let’s start with this sample PDF.  
+  
+Run the command below to upload the sample PDF document to the Azure Blob Storage: 
 
 {{< copycode lang="bash" >}}
 bash ./helper.sh upload-pdf
 {{< /copycode >}} 
 
-Let's validate that the PDF was indeed uploaded to the storage account. Open the storage account and
+Let’s validate that the PDF document was successfully uploaded to the storage account. Follow these steps: 
 
 1. Click **Storage browser**
 2. Click **Blob containers** and **data**
@@ -26,7 +27,7 @@ Observe that there is **raw_data** directory. Now click at the directory and val
 <details>
   <summary><b>Get help!</b></summary>
 
-If you're unsure which storage account it is to look for the PDF document, run the command below!
+If you're unsure which storage account is being used for the PDF document upload, you can retrieve the information by running the command below:
 
 {{< copycode lang="bash" >}}
 echo "${storage_account_name}"
@@ -120,7 +121,7 @@ You can also write advance queries using the search explorer, to do so
 
 ---
 
-Congratulations! You successfully populated the Azure AI Search index, and with that completed the Document Data Management section!
+**Congratulations!** You’ve successfully populated the **Azure AI Search Index** and completed the **Document Data Management** section! Now we’re ready to move on to the next step—configuring and running the demo application!
 
 ---
 

@@ -18,7 +18,7 @@ title: Deploying Azure OpenAI resource and models
 
 ## 1. Create and deploy an Azure OpenAI Service resource
 
-We will start by creating an **Azure OpenAI resource** in the new resource group you created in the [Prerequisites](/azure-open-ai-rag-oyd-text-images/prerequisites#create-azure-resource-group) section. Please run the following command to create the resource:  
+We’ll begin by creating an **Azure OpenAI resource** within the new resource group you created in the [Prerequisites](/azure-open-ai-rag-oyd-text-images/prerequisites#create-azure-resource-group) section. Please execute the following command to create the resource: 
 
 {{< copycode lang="bash" >}} 
 az cognitiveservices account create \
@@ -30,12 +30,12 @@ az cognitiveservices account create \
   --yes
 {{< /copycode >}}  
 
-Let's verify that  Azure OpenAI Service resource was created successfully. Navigate to Azure portal and open the resource group - observe the Azure OpenAI **aoai-rag-oyd** resource is created.
+To ensure the Azure OpenAI Service resource was created successfully, navigate to the Azure portal and access the resource group. Check that the Azure OpenAI resource named **aoai-rag-oyd** is present.
 
 <details>
   <summary><b>Get help!</b></summary>
 
-Run the command below to get the URL to the resource group you created prior.
+Run the following command to retrieve the URL for the resource group you created earlier:
 
 {{< copycode lang="bash" >}}
 
@@ -54,11 +54,15 @@ echo "${url}"
 
 ## 2. Retrieve information about the resource
 
-After you create the resource, you can use different commands to find useful information about your Azure OpenAI Service instance. The following examples demonstrate how to retrieve the REST API endpoint base URL and the access keys for the new resource.
+After creating the Azure OpenAI Service resource, you can use various commands to gather useful details about your instance. Below are examples of commands to retrieve the REST API endpoint base URL and the access keys for your new resource.  
 
-> Please create ".env" file in root directory of the git repository. We will use this file to collect data for later use.
+> To store environment variables for later use, create a ".env" file in the root directory of your Git repository. This file will be used to securely collect and manage sensitive data like API keys, endpoints, and other configuration details.  
 
-We need to retreive the **Endpoint** and **Key** from the Azure Open AI resource, which you'll use later to setup Azure AI Search, and for the demo application.
+{{< copycode lang="bash" >}}
+touch .env
+{{< /copycode >}}
+
+To set up **Azure AI Search** and use these credentials in the demo application, you need to retrieve the **Endpoint** and **Key** from your Azure OpenAI resource. Follow the steps below to fetch this information.  
 
 Open the Azure Open AI resource and:
 - Nagivate to **Resource Management**
@@ -67,6 +71,8 @@ Open the Azure Open AI resource and:
 ### 2.1 Get the Azure OpenAI endpoint URL
 
 You should see the **Endpoint** value. Copy the value and paste it into the **.env** file in the project root directory. It should look as the following:
+
+After retrieving the **Endpoint** value from your Azure OpenAI resource, copy the value and paste it into the **.env** file located in the root directory of your project. Your **.env** file should look as following:
 
 **Command:**
 
@@ -138,7 +144,11 @@ echo "AZURE_OPENAI_KEY=${AZURE_OPENAI_KEY}" >> .env
 
 ## 3. Create Azure Open AI chat and embedding models
 
-Azure AI search depends on the Azure Open AI embedding model to convert plain text to a vector embedding. The demo application depends on Azure Open AI chat model so end-users can chat with your PDF documents. Therefore we needs to create both models.
+To set up **Azure AI Search** and the **demo application**, you need to create two Azure OpenAI models:  
+  
+1. **Embedding Model**: Converts plain text into vector embeddings, which are essential for Azure AI Search.  
+2. **Chat Model**: Powers the demo application, allowing end-users to interact with PDF documents through chat.  
+  
 
 ### 3.1. Create Azure Open AI embedding model
 
@@ -178,7 +188,7 @@ echo "${url}"
 
 ![alt](../../images/document_data_management_2_azure_oai_2.png)
 
-We also need the embedding model and deployment name for later for Azure AI Search to have the permissions to call it during the indexing process. Also the demo application will need the deployment name as part of the configuration to configure the Azure OpenAI. Run the following command to add those to the **.env** file.
+We need the embedding model and its deployment name to enable Azure AI Search to access it during the indexing process. Additionally, the demo application requires the deployment name as part of its configuration to set up Azure OpenAI. Use the following command to add these details to the **.env** file.
 
 {{< copycode lang="bash" >}}
 echo "AZURE_OPENAI_CHATGPT_EMBEDDING_DEPLOYMENT=${model_deployment_name_embedding}" >> .env
@@ -250,13 +260,13 @@ AZURE_OPENAI_API_VERSION=<chat-model-api-version>
 
 ## 4. (Optional) Try the chat model in Azure OpenAI Studio playground
 
-Since the chat model is deployed successfully, try it out in the playground! In the left navigation bar, under **Playground**, click **Chat**. You should see a chat window with free input form text box, enter your query and hit enter.
+Now that the chat model has been successfully deployed, you can test it in the playground! In the left navigation menu, navigate to **Playground** and select **Chat**. A chat interface with a free-form text input box will appear. Enter your query in the text box and press Enter to interact with the model.
 
 ![alt](../../images/document_data_management_2_azure_oai_3.png)
 
 ---
 
-**Congratulation!** You successfully deployed Azure Open AI resource, and deployed the embedding and the chat models! Next we will deploy and configure Azure AI Search.
+**Congratulations!** You have successfully deployed the Azure OpenAI resource along with the embedding and chat models! Next, we will move on to deploying and configuring Azure AI Search.
 
 ---
 

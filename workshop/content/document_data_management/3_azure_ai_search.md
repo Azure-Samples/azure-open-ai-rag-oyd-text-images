@@ -103,7 +103,7 @@ search_service_key=<primary-admin-key>
 
 ## 2. Creating Azure Storage Account
 
-Before we can configure Azure AI Search, we need to create an Azure Storage Account, as we need a place for Azure AI Search to load the PDF documents from. With that, this storage account will also be the place where we'll upload PDF documents.
+Before configuring Azure AI Search, we first need to create an Azure Storage Account. This storage account will serve as the repository where Azure AI Search will load the PDF documents from. Additionally, it will act as the location where we will upload the PDF documents for processing.
 
 Run the command below to create the storage account, and storage the storage account name to the **.env** config file.
 
@@ -144,7 +144,7 @@ search_service_key=<primary-admin-key>
 storage_account_name=<storage-account-name>
 ``` 
 
-Lastly, create a storage account container from where Azuer AI Search will be pulling the prepaired data from.
+Finally, create a storage account container that will serve as the source for Azure AI Search to retrieve the prepared data. This container will store the data that Azure AI Search will process during its operations.
 
 {{< copycode lang="bash" >}}
 # Get storage account key for authorization
@@ -165,18 +165,18 @@ az storage container create \
 To use Azure AI Search, we need to create an **index**, **indexer**, **data source**, and **skillset**. Let's quickly review what is each of those do.
 
 **Data Source**  
-In Azure AI Search, a data source is used with indexers, providing the connection information for on demand or scheduled data refresh of a target index, pulling data from supported Azure data sources.
+In Azure AI Search, a data source serves as a connection point for indexers. It provides the necessary connection details to enable on-demand or scheduled data refreshes for a target index, pulling data from supported Azure data sources.
 
 **Indexer**  
-An indexer automates indexing from supported Azure data sources such as Azure Storage, Azure SQL Database, and Azure Cosmos DB to name a few. Indexers use a predefined data source and index to establish an indexing pipeline that extracts and serializes source data, passing it to a search service for data ingestion. For AI enrichment of image and unstructured text, indexers can also accept a skillset that defines AI processing.
+An indexer automates the process of indexing data from supported Azure data sources, such as Azure Storage, Azure SQL Database, and Azure Cosmos DB, among others. It leverages a predefined data source and index to create an indexing pipeline that extracts, transforms, and serializes the source data before passing it to the search service for ingestion. Additionally, for AI enrichment of images and unstructured text, indexers can incorporate a skillset, which defines the AI processing tasks to be applied during indexing.
 
 **Index**  
-a search index is your searchable content, available to the search engine for indexing, full text search, vector search, hybrid search, and filtered queries. An index is defined by a schema and saved to the search service, with data import following as a second step.
+A search index represents your searchable content, making it available to the search engine for various operations such as indexing, full-text search, vector search, hybrid search, and filtered queries. The index is defined by a schema, which specifies the structure of the data, including fields, types, and attributes. Once the schema is defined and saved to the Azure AI Search service, data import occurs as a subsequent step to populate the index with content.
 
 **Skillset**  
-A skillset is a reusable object in Azure AI Search that's attached to an indexer. It contains one or more skills that call built-in AI or external custom processing over documents retrieved from an external data source.
+A skillset in Azure AI Search is a reusable object that is linked to an indexer. It consists of one or more skills, which apply built-in AI capabilities (such as OCR, natural language processing, or entity recognition) or invoke external custom processing to enrich documents retrieved from an external data source. Skillsets allow you to enhance raw data by extracting meaningful information, transforming it into searchable content, and enabling advanced search and analysis capabilities.
 
-Before we can start creating the data source, we need to add your subscription id to the **.env** configuration file. Run the command below to the subscription id.
+Before creating the data source, you need to add your subscription ID to the **.env** configuration file. Use the command below to set your subscription ID.
 
 {{< copycode lang="bash" >}}
 subscription_id=$(az account show | jq -r .id)
@@ -209,27 +209,29 @@ subscription_id=<subscription-id>
 
 ### 3.1 Create data source
 
-To create the Azure AI Search data source, we'll use:
+To create the Azure AI Search data source, we will use the following:  
+  
+- **subscription_id**: Retrieved from the **.env** file.    
+- **resource_group_name**: Retrieved from the **.env** file.    
+- **storage_account_name**: Retrieved from the **.env** file.    
+- **index_name**: Loaded as an environment variable during the prerequisites step when you run **source helper.sh**.    
+- Data source configuration template file, located at **bicep/helpers/datasource.json**.    
 
-- **subscription_id**: we'll be looking it up from the **.env** file
-- **resource_group_name**: we'll be looking it up from the **.env** file
-- **storage_account_name**: we'll be looking it up from the **.env** file
-- **index_name**: which is loaded as environment variable from prerequisites step when you run **source helper.sh**
-- data source configuration template file, which is located under **bicep/helpers/datasource.json**
-
-Feel free open the file to have a closer look, either using the prefer editor of your choice, or by running the following command:
+Feel free to open the file to take a closer look, either with your preferred text editor or by running the following command:
 
 {{< copycode lang="bash" >}}
 cat bicep/helpers/datasource.json
 {{< /copycode >}} 
 
-Observe that there is a resemblance between the variables listed above and placeholder values in all caps in the template file. We'll be using a helper funtion, which will replace the placeholder values with values from your **.env** configuration file and create the data source in your Azure AI Search. To create the data source, run the following command below.
+Observe that there is a resemblance between the variables listed above and the placeholder values in all caps within the template file. We'll be using a helper function to replace the placeholder values with the corresponding values from your **.env** configuration file and create the data source in your Azure AI Search.   
+  
+To create the data source, run the following command below. 
 
 {{< copycode lang="bash" >}}
 bash ./helper.sh create-ai-search-data-source
 {{< /copycode >}} 
 
-Let's validate that the data source was created successfully. In Azure portal, open the Azure AI Search resource and
+Let's validate that the data source was created successfully. In the Azure portal, open the Azure AI Search resource and follow the steps below. 
 
 - Click **Search management**, and after click **Data sources**
 - Validate that you see the new data source.
@@ -239,23 +241,22 @@ Let's validate that the data source was created successfully. In Azure portal, o
 
 ### 3.2 Create index
 
-To create the Azure AI Search index, we'll use:
-
-- **AZURE_OPENAI_ENDPOINT**: Azure OpenAI endpoint, as Azure AI Search will be making the request to Azure Open AI on your behave. We'll be looking it up from the **.env** file
-- **AZURE_OPENAI_CHATGPT_EMBEDDING_MODEL_NAME**: Azure OpenAI embedding deployment name, we'll be looking it up from the **.env** file
-- **AZURE_OPENAI_CHATGPT_EMBEDDING_DEPLOYMENT**: Azure OpenAI embedding model name, we'll be looking it up from the **.env** file
-- **AZURE_OPENAI_KEY**: Azure OpenAI API key, for Azure AI Search to be able to authorize the requirest to Azure Open AI. We'll be looking it up from the **.env** file
-- **index_name**: which is loaded as environment variable from prerequisites step when you run **source helper.sh**
-- index configuration template file, which is located under **bicep/helpers/index.json**
-
-Feel free open the file to have a closer look, either using the prefer editor of your choice, or by running the following command:
+To create the Azure AI Search index, we'll use the following:  
+  
+- **AZURE_OPENAI_ENDPOINT**: Azure OpenAI endpoint, as Azure AI Search will be making requests to Azure OpenAI on your behalf. Retrieved from the **.env** file.    
+- **AZURE_OPENAI_CHATGPT_EMBEDDING_MODEL_NAME**: Azure OpenAI embedding deployment name. Retrieved from the **.env** file.    
+- **AZURE_OPENAI_CHATGPT_EMBEDDING_DEPLOYMENT**: Azure OpenAI embedding model name. Retrieved from the **.env** file.    
+- **AZURE_OPENAI_KEY**: Azure OpenAI API key, allowing Azure AI Search to authorize requests to Azure OpenAI. Retrieved from the **.env** file.    
+- **index_name**: Loaded as an environment variable during the prerequisites step when you run **source helper.sh**.    
+- Index configuration template file, located at **bicep/helpers/index.json**.    
+  
+Feel free to open the file to take a closer look, either using your preferred editor or by running the following command:  
 
 {{< copycode lang="bash" >}}
 cat bicep/helpers/index.json
 {{< /copycode >}} 
 
 Similar to the data source helper function, the above values will be used to replace the placeholder values in the template file.
-
 
 To create the index, run the following command below.
 
@@ -293,22 +294,21 @@ Semantic ranker is a collection of query-side capabilities that improve the qual
 
 ### 3.3 Create skillset
 
-To create the Azure AI Search skillset, we'll use:
-
-- **AZURE_OPENAI_CHATGPT_EMBEDDING_MODEL_NAME**: Azure OpenAI embedding deployment name, we'll be looking it up from the **.env** file
-- **AZURE_OPENAI_CHATGPT_EMBEDDING_DEPLOYMENT**: Azure OpenAI embedding model name, we'll be looking it up from the **.env** file
-- **AZURE_OPENAI_KEY**: Azure OpenAI API key, for Azure AI Search to be able to authorize the requirest to Azure Open AI. We'll be looking it up from the **.env** file
-- **index_name**: which is loaded as environment variable from prerequisites step when you run **source helper.sh**
-- skillset configuration template file, which is located under **bicep/helpers/skillset.json**
-
-Feel free open the file to have a closer look, either using the prefer editor of your choice, or by running the following command:
+To create the Azure AI Search skillset, we'll use the following:  
+  
+- **AZURE_OPENAI_CHATGPT_EMBEDDING_MODEL_NAME**: Azure OpenAI embedding deployment name. Retrieved from the **.env** file.    
+- **AZURE_OPENAI_CHATGPT_EMBEDDING_DEPLOYMENT**: Azure OpenAI embedding model name. Retrieved from the **.env** file.    
+- **AZURE_OPENAI_KEY**: Azure OpenAI API key, allowing Azure AI Search to authorize requests to Azure OpenAI. Retrieved from the **.env** file.    
+- **index_name**: Loaded as an environment variable during the prerequisites step when you run **source helper.sh**.    
+- Skillset configuration template file, located at **bicep/helpers/skillset.json**.    
+  
+Feel free to open the file to take a closer look, either using the preferred editor of your choice or by running the following command:  
 
 {{< copycode lang="bash" >}}
 cat bicep/helpers/skillset.json
 {{< /copycode >}} 
 
 Similar to the previous helper functions, the above values will be used to replace the placeholder values in the template file.
-
 
 To create the skillset, run the following command below.
 
@@ -323,7 +323,7 @@ Let’s validate that the skillset was created successfully. Inside the Azure AI
 
 ![alt](../../images/document_data_management_3_azure_ai_search_6.png)
 
-Open the skillset and observe the **skills**. As you might have already noticed when looking at the local skillset template file, there is only one skillset configured, which is the **AzureOpenAIEmbeddingSkill** skillset. Let's have a closer look what this skillset is doing exactly.
+Open the skillset and observe the **skills**. As you might have already noticed when looking at the local skillset template file, there is only one skillset configured, which is the **AzureOpenAIEmbeddingSkill** skillset. Let's take a closer look at what this skillset is doing exactly.
 
 **Azure OpenAI Embedding skill**
 
@@ -333,7 +333,7 @@ The Azure OpenAI Embedding skill connects to a deployed embedding model on your 
 
 ### 3.4 Create indexer
 
-Before we can create the indexer, we need to give the Azure AI Search system assigned identity the permissions to access the storage blob, so the indexer can pull the data and populate the index. Run the following command to assign built-in Storage Blob Data Reader role.
+Before we can create the indexer, we need to grant the Azure AI Search system-assigned identity the necessary permissions to access the storage blob. This will allow the indexer to pull data from the storage blob and populate the index.
 
 {{< copycode lang="bash" >}}
 # This is the built-in Storage Blob Data Reader role. 
@@ -356,23 +356,24 @@ az role assignment create \
 	--assignee "${assignee}"
 {{< /copycode >}} 
 
-Now we are ready for the last step in setting up Azure AI Search is to create the indexer. To create the Azure AI Search skillset, we'll use:
-
-- **AZURE_OPENAI_ENDPOINT**: Azure OpenAI endpoint, as Azure AI Search will be making the request to Azure Open AI on your behave. We'll be looking it up from the **.env** file
-- **AZURE_OPENAI_CHATGPT_EMBEDDING_MODEL_NAME**: Azure OpenAI embedding deployment name, we'll be looking it up from the **.env** file
-- **AZURE_OPENAI_CHATGPT_EMBEDDING_DEPLOYMENT**: Azure OpenAI embedding model name, we'll be looking it up from the **.env** file
-- **AZURE_OPENAI_KEY**: Azure OpenAI API key, for Azure AI Search to be able to authorize the requirest to Azure Open AI. We'll be looking it up from the **.env** file
-- **index_name**: which is loaded as environment variable from prerequisites step when you run **source helper.sh**
-- indexer configuration template file, which is located under **bicep/helpers/indexer.json**
-
-Feel free open the file to have a closer look, either using the prefer editor of your choice, or by running the following command:
+Now we are ready for the final step in setting up Azure AI Search: creating the indexer. To create the Azure AI Search indexer, we'll use the following:  
+  
+- **AZURE_OPENAI_ENDPOINT**: Azure OpenAI endpoint. Azure AI Search will use this endpoint to make requests to Azure OpenAI on your behalf. Retrieved from the **.env** file.    
+- **AZURE_OPENAI_CHATGPT_EMBEDDING_MODEL_NAME**: Azure OpenAI embedding deployment name. Retrieved from the **.env** file.    
+- **AZURE_OPENAI_CHATGPT_EMBEDDING_DEPLOYMENT**: Azure OpenAI embedding model name. Retrieved from the **.env** file.    
+- **AZURE_OPENAI_KEY**: Azure OpenAI API key. Azure AI Search uses this key to authorize requests to Azure OpenAI. Retrieved from the **.env** file.    
+- **index_name**: The index name, loaded as an environment variable during the prerequisites step when you run **source helper.sh**.    
+- Indexer configuration template file, located at **bicep/helpers/indexer.json**.  
+  
+Feel free to open the configuration template file to take a closer look, either using your preferred editor or by running the following command:  
+  
 
 {{< copycode lang="bash" >}}
 cat bicep/helpers/indexer.json
 {{< /copycode >}} 
 
-Similar to the previous helper functions, the above values will be used to replace the placeholder values in the template file.
-
+Similar to the previous helper functions, the above values will be used to replace the placeholder values in the template file.  
+  
 To create the indexer, run the following command below.
 
 {{< copycode lang="bash" >}}
@@ -386,11 +387,11 @@ Let’s validate that the indexer was created successfully. Inside the Azure AI 
 
 ![alt](../../images/document_data_management_3_azure_ai_search_8.png)
 
-Also, observe that there aren't any documents that were processed, evidently be *0/0* in both **Docs succeeded** and **Error/Warning**, even though the indexer did run a job upon index creation.
+Also, observe that there aren't any documents that were processed, evidently by *0/0* in both **Docs succeeded** and **Error/Warning**, even though the indexer did run a job upon index creation.
 
 ---
 
-**Congratulation!** You successfully configured Azure Open AI resource, and it's ready to load some PDF data, use Azure OpenAI search to create the embedding, and populate the index!
+**Congratulation!** You've successfully configured your Azure OpenAI resource, and it is now ready to handle PDF data, use Azure OpenAI Search to create embeddings, and populate the index!
 
 Before we can populate the index, we needed to upload the raw PDFs and prepair for the indexer to be able to embed and popular the index - which is exactly what we'll be doing next!
 
