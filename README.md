@@ -1,8 +1,11 @@
 # RAG on PDF with text and embedded Images, with citations referencing image answering user query
 
+## Workshop
+
+Check out the [workshop based on this repo and solution](https://azure-samples.github.io/azure-open-ai-rag-oyd-text-images/), offering deep learning with self-paced activities.
+
 ## Content
 - [Overview](#overview)
-- [Workshop: In-depth learning by using self-paste workshop](https://azure-samples.github.io/azure-open-ai-rag-oyd-text-images/)
 - [Reference architecture](#reference-architecture)
   - [Document data management](#document-data-management)
   - [Application runtime](#application-runtime)
