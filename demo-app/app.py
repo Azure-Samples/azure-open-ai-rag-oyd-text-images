@@ -343,8 +343,6 @@ def get_llm_completion(prompt):
         print('>>> here???')
     st.session_state["messages"].append({"role": "assistant", "content": response})
 
-    print('>>> completion')
-    print(completion)
     return json.loads(completion.to_json())
 
 
@@ -363,9 +361,7 @@ def generate_response(prompt):
     total_tokens = completion.usage.total_tokens
     prompt_tokens = completion.usage.prompt_tokens
     completion_tokens = completion.usage.completion_tokens
-    
-    print('**** prompt_tokens')
-    print(prompt_tokens)
+
     return response, total_tokens, prompt_tokens, completion_tokens
 
 

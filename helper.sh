@@ -20,7 +20,7 @@ model_name_embedding="text-embedding-ada-002"
 model_version_embedding="2"
 model_deployment_name_chat="${resource_group_name}-chat"
 model_name_chat="gpt-4o"
-model_version_chat="2024-08-06"
+model_version_chat="2024-11-20"
 model_api_version_chat="2025-01-01-preview"
 
 
@@ -245,10 +245,6 @@ case $@ in
     load_dot_env
 
     base_url="https://${search_service_name}.search.windows.net"
-
-    echo "${search_service_key}"
-    echo "${index_name}"
-    echo "${api_version}"
 
     # Docs: https://learn.microsoft.com/en-us/azure/search/search-howto-run-reset-indexers?tabs=portal
     curl -X POST "${base_url}/indexers/${index_name}-indexer/run?api-version=${api_version}" \

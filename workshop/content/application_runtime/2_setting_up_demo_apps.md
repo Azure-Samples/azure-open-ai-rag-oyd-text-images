@@ -113,6 +113,20 @@ Open the demo app in your browser **http://localhost:8501**. In chat window, typ
 
 Upon successful chat query response, you should be a text response with an image, a high level archtecture about AKS similar to the image shown below.
 
+### Note
+
+The **Tokens per Minute Rate Limit** for both models was not configured to be very high. If you experience throttling while interacting with your documents and encounter errors with messages similar to the one below, consider increasing the rate limits for each model to resolve the issue. For more information about quotas, refer to [manage Azure OpenAI Service quota](https://learn.microsoft.com/en-us/azure/ai-services/openai/how-to/quota).
+
+```json {class="json-class" id="bash-codeblock"}
+{
+   "error" : {
+      "code" : "429",
+      "message" : "Rate limit is exceeded. Try again in 2 seconds."
+   }
+}
+```
+
+
 <img src="https://github.com/Azure-Samples/azure-open-ai-rag-oyd-text-images/blob/workshop/images/demo_app_chat_view.png?raw=true" alt="drawing" width="800"/>
 
 **Congratulations!** You successfully executed end-to-end demo, and the request made through each component of the solution. Ab next, you'll learn how to extend it and bring your own data.

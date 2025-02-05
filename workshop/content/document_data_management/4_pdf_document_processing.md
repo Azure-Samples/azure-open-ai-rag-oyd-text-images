@@ -204,7 +204,7 @@ To validate that the function was published successfully, follow these steps:
 3. Verify that a function named **split_pdf** is present.  
 4. Confirm that the function is configured with a **Blob** trigger.  
   
-If all of the above are correct, the deployment was successful.
+The deployment is successful if the **split_pdf** function is visible. **Note:** After successfully deploying the function, it may take 1-2 minutes for it to appear in the Azure portal.
 
 ![alt](../../images/document_data_management_4_pdf_document_processing_2.png)
 
