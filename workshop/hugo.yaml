@@ -1,0 +1,150 @@
+baseURL: "https://azure-samples.github.io/azure-open-ai-rag-oyd-text-images/"
+languageCode: en-us
+title: AI Workshop
+theme: digitalgarden
+# enableEmoji: true
+# relativeURLs: true
+
+# sectionPagesMenu = 'main'
+params:
+  description: "My Digital Garden on the Internet"
+  favicon: '../../favicon.ico'
+  azureAppInsightsKey: "b0f7a15c-27ed-438b-8022-22ec060e410e"
+  # customCSS:
+  #   href: "/static/css/main.css"
+
+menu:
+  main:
+    - identifier: home
+      name: Home
+      url: /
+      weight: 100
+    - identifier: home_workshop_overview
+      name: Workshop Overview
+      url: /workshop_overview/
+      weight: 110
+    - identifier: home_prerequisites
+      name: Prerequisites
+      url: /prerequisites/
+      weight: 120
+    
+    - identifier: ddm
+      name: 'Document Data Management'
+      params:
+        header: true
+      weight: 200
+    - identifier: ddm_overview
+      name: 1. Overview
+      url: /document_data_management/1_overview/
+      weight: 210
+    - identifier: ddm_aoai
+      name: 2. Azure OpenAI
+      url: /document_data_management/2_azure_oai/
+      weight: 220
+    - identifier: ddm_ai_search
+      name: 3. Azure AI Search
+      url: /document_data_management/3_azure_ai_search/
+      weight: 230
+    - identifier: ddm_doc_prep
+      name: 4. PDF Document Processing
+      url: /document_data_management/4_pdf_document_processing/
+      weight: 240
+    - identifier: ddm_ai_search_index
+      name: 5. Populating Azure AI Index
+      url: /document_data_management/5_populating_azure_ai_index/
+      weight: 250
+    
+    - identifier: apprun
+      name: 'Application Runtime'
+      params:
+        header: true
+      weight: 300
+    - identifier: apprun_overview
+      name: 1. Overview
+      url: /application_runtime/1_overview/
+      weight: 310
+    - identifier: apprun_demo_app
+      name: 2. Setting Up Demo App
+      url: /application_runtime/2_setting_up_demo_apps/
+      weight: 320
+    - identifier: apprun_ext_solution
+      name: 3. Extending With Your Own PDF
+      url: /application_runtime/3_extend/
+      weight: 330
+    
+    - identifier: chat_histroy
+      name: 'Chat History'
+      params:
+        header: true
+      weight: 400
+    - identifier: chat_histroy_overview
+      name: 1. Overview
+      url: /chat_history/1_overview/
+      weight: 410
+    # - identifier: chat_histroy_cosmos_db
+    #   name: 2. Azure Cosmos DB
+    #   url: /chat_history/2_azure_cosmos_db/
+    #   weight: 420
+
+    - identifier: cleanup
+      name: 'Clean Up'
+      params:
+        header: true
+      weight: 500
+    - identifier: cleanup_cleanup
+      name: Azure Resource Clean Up
+      url: /clean_up/1_clean_up/
+      weight: 510
+
+    - identifier: references
+      name: 'References'
+      params:
+        header: true
+      weight: 900
+    - identifier: references_source_code
+      name: 'Source Code'
+      url: 'https://github.com/Azure-Samples/azure-open-ai-rag-oyd-text-images'
+      weight: 910
+    - identifier: references_resources
+      name: Further Resources
+      url: /further_resources/1_further_resources/
+      weight: 920
+    - identifier: references_feedback
+      name: Feedback
+      url: https://github.com/Azure-Samples/azure-open-ai-rag-oyd-text-images/issues/new
+      weight: 930
+
+  social:
+    - name: 'Twitter'
+      url: 'https://twitter.com'
+      weight: 1
+    - name: 'GitHub'
+      url: 'https://github.com/Azure-Samples/azure-open-ai-rag-oyd-text-images'
+      weight: 2
+    - name: 'Email'
+      url: 'mailto:user@example.org'
+      weight: 3
+    - name: 'RSS'
+      url: '/articles/index.xml'
+      weight: 4
+
+markup:
+  highlight:
+    style: "dracula"
+    # noClasses: false
+  goldmark:
+    renderer: 
+      unsafe: true
+  extras:
+    typographer:
+        apostrophe: '&rsquo;'
+        disable: false
+        ellipsis: '&hellip;'
+        emDash: '&mdash;'
+        enDash: '&ndash;'
+        leftAngleQuote: '&laquo;'
+        leftDoubleQuote: '&ldquo;'
+        leftSingleQuote: '&lsquo;'
+        rightAngleQuote: '&raquo;'
+        rightDoubleQuote: '&rdquo;'
+        rightSingleQuote: '&rsquo;'

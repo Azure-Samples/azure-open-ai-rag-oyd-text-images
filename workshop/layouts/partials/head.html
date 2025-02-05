@@ -1,0 +1,68 @@
+
+<head>
+    <meta charset="utf-8" />
+  
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+  
+    <link rel="icon" href="{{ if (isset .Site.Params "favicon") }}{{ .Site.Params.favicon }}{{ else }}/favicon.ico{{ end }}">
+  
+    <title>
+      {{ block "title" . }} {{- .Title }} - {{ .Site.Title -}} {{ end }}
+    </title>
+  
+    <meta name="description" content="{{ with .Description }}{{ . }}{{ else }}{{if .IsPage}}{{ .Summary }}{{ else }}{{ with .Site.Params.description }}{{ . }}{{ end }}{{ end }}{{ end -}}" />
+    
+    {{- if .Keywords }}
+    <meta name="keywords" content="{{ delimit .Keywords "," }}" />
+    {{ end -}}
+    
+    {{- if .Params.Author }}
+    <meta name="author" content="{{ .Params.Author}}" />
+    {{ end -}}
+    
+    {{ hugo.Generator }}
+  
+    <link rel="stylesheet" href="{{ "css/main.css" | absURL}}" />
+  
+    <!-- Katex support -->
+    {{ if .Params.math }}
+      <link
+        rel="stylesheet"
+        href="https://cdn.jsdelivr.net/npm/katex@0.10.0-rc.1/dist/katex.min.css"
+        integrity="sha384-D+9gmBxUQogRLqvARvNLmA9hS2x//eK1FhVb9PiU86gmcrBrJAQT8okdJ4LMp2uv"
+        crossorigin="anonymous"
+      >
+  
+      <script defer
+        src="https://cdn.jsdelivr.net/npm/katex@0.10.0-rc.1/dist/katex.min.js"
+        integrity="sha384-483A6DwYfKeDa0Q52fJmxFXkcPCFfnXMoXblOkJ4JcA8zATN6Tm78UNL72AKk+0O"
+        crossorigin="anonymous"
+      ></script>
+  
+      <script defer
+        src="https://cdn.jsdelivr.net/npm/katex@0.10.0-rc.1/dist/contrib/auto-render.min.js"
+        integrity="sha384-yACMu8JWxKzSp/C1YV86pzGiQ/l1YUfE8oPuahJQxzehAjEt2GiQuy/BIvl9KyeF"
+        crossorigin="anonymous"
+        onload="renderMathInElement(document.body);"
+      ></script>
+    {{ end }}
+
+    {{ if .Site.Params.azureAppInsightsKey }}
+        <script type="text/javascript">
+            var sdkInstance = "appInsightsSDK"; window[sdkInstance] = "appInsights"; var aiName = window[sdkInstance], aisdk = window[aiName] || function (e) { function n(e) { t[e] = function () { var n = arguments; t.queue.push(function () { t[e].apply(t, n) }) } } var t = { config: e }; t.initialize = !0; var i = document, a = window; setTimeout(function () { var n = i.createElement("script"); n.src = e.url || "https://az416426.vo.msecnd.net/scripts/b/ai.2.min.js", i.getElementsByTagName("script")[0].parentNode.appendChild(n) }); try { t.cookie = i.cookie } catch (e) { } t.queue = [], t.version = 2; for (var r = ["Event", "PageView", "Exception", "Trace", "DependencyData", "Metric", "PageViewPerformance"]; r.length;)n("track" + r.pop()); n("startTrackPage"), n("stopTrackPage"); var s = "Track" + r[0]; if (n("start" + s), n("stop" + s), n("setAuthenticatedUserContext"), n("clearAuthenticatedUserContext"), n("flush"), !(!0 === e.disableExceptionTracking || e.extensionConfig && e.extensionConfig.ApplicationInsightsAnalytics && !0 === e.extensionConfig.ApplicationInsightsAnalytics.disableExceptionTracking)) { n("_" + (r = "onerror")); var o = a[r]; a[r] = function (e, n, i, a, s) { var c = o && o(e, n, i, a, s); return !0 !== c && t["_" + r]({ message: e, url: n, lineNumber: i, columnNumber: a, error: s }), c }, e.autoExceptionInstrumented = !0 } return t }(
+                {
+                    instrumentationKey: "{{- .Site.Params.azureAppInsightsKey -}}"
+                }
+            ); window[aiName] = aisdk, aisdk.queue && 0 === aisdk.queue.length && aisdk.trackPageView({});
+        </script>
+    {{ end }}
+  
+    {{ template "_internal/opengraph.html" . }}
+  
+    {{ template "_internal/twitter_cards.html" . }}
+  
+    {{ template "_internal/schema.html" . }}
+  
+    {{ template "_internal/schema.html" . }}
+  </head>
+  

@@ -1,0 +1,104 @@
+<!-- layouts/shortcodes/copycode.html -->  
+  
+<!-- Check if the copycode resources have already been included -->  
+{{ if not (.Page.Resources.Get "copycode-included") }}  
+  <!-- Inline CSS for the copy button and code block styling -->  
+  <style>  
+    .code-wrapper {  
+      position: relative;  
+      margin: 1em 0;  
+    }  
+  
+    .copy-button {  
+      position: absolute;  
+      top: 0.5em;  
+      right: 0.5em;  
+      padding: 0.3em 0.6em;  
+      font-size: 0.9em;  
+      background-color: #e0e0e0;  
+      border: none;  
+      border-radius: 4px;  
+      cursor: pointer;  
+      transition: background-color 0.3s;  
+    }  
+  
+    .copy-button:hover {  
+      background-color: #d5d5d5;  
+    }  
+  
+    .copy-button:disabled {  
+      cursor: not-allowed;  
+      opacity: 0.6;  
+    }  
+  
+    pre {  
+      padding: 1em;  
+      background-color: #f5f5f5;  
+      overflow: auto;  
+      border-radius: 4px;  
+    }  
+  </style>  
+  
+  <!-- Inline JavaScript for copy functionality -->  
+  <script>  
+    (function() {  
+      // Prevent multiple script executions  
+      if (window.copyCodeInitialized) {  
+        return;  
+      }  
+      window.copyCodeInitialized = true;  
+  
+      function copyCode(button) {  
+        const codeBlock = button.nextElementSibling.querySelector('code');
+        if (!codeBlock) {  
+          console.error('No code block found!');  
+          return;  
+        }  
+        const codeText = codeBlock.innerText;  
+  
+        if (!navigator.clipboard) {  
+          // Fallback for older browsers  
+          const textarea = document.createElement('textarea');  
+          textarea.value = codeText;  
+          document.body.appendChild(textarea);  
+          textarea.focus();  
+          textarea.select();  
+          try {  
+            document.execCommand('copy');  
+            button.innerText = '✅ Copied!';  
+          } catch (err) {  
+            console.error('Failed to copy:', err);  
+            button.innerText = '❌ Error';  
+          }  
+          document.body.removeChild(textarea);  
+        } else {  
+          navigator.clipboard.writeText(codeText).then(() => {  
+            button.innerText = '✅ Copied!';  
+          }, (err) => {  
+            console.error('Failed to copy:', err);  
+            button.innerText = '❌ Error';  
+          });  
+        }  
+  
+        setTimeout(() => {  
+          button.innerText = '📋 Copy';  
+        }, 2000);  
+      }  
+  
+      // Expose the function to the global scope  
+      window.copyCode = copyCode;  
+    })();  
+  </script>  
+  
+  <!-- Mark that the resources have been included to prevent duplication -->  
+  {{ $_ := $.Scratch.Set "copycode-included" true }}  
+{{ end }}  
+  
+<!-- Code block with copy button -->  
+<div class="code-wrapper" >  
+  <button class="copy-button" aria-label="Copy code" onclick="copyCode(this)" >  
+    📋 Copy  
+  </button>  
+  <pre><code class="highlight language-{{ .Get "lang" | default "none" }}" >{{ .Inner | safeHTML }}</code></pre> 
+
+</div>  
