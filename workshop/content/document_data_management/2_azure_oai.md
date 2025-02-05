@@ -27,6 +27,7 @@ az cognitiveservices account create \
   --location "${region}" \
   --kind OpenAI \
   --sku s0 \
+  --custom-domain "${resource_group_name}" \
   --yes
 {{< /copycode >}}  
 
@@ -162,11 +163,11 @@ az cognitiveservices account deployment create \
 	--model-name "${model_name_embedding}" \
 	--model-version "${model_version_embedding}" \
 	--model-format OpenAI \
-	--sku-capacity "1" \
+	--sku-capacity "10" \
 	--sku-name "Standard"
 {{< /copycode >}} 
 
-Let's validate that the embedding model was created successfully. Open the Azure OpenAi Studio in the left navigation bar, under **Shared resources**, click **Deployments**.
+Let's validate that the embedding model was created successfully. Open the Azure OpenAI Studio in the left navigation bar, under **Shared resources**, click **Deployments**.
 
 <details>
   <summary><b>Get help!</b></summary>
@@ -225,7 +226,7 @@ az cognitiveservices account deployment create \
 	--model-name "${model_name_chat}" \
 	--model-version "${model_version_chat}" \
 	--model-format OpenAI \
-	--sku-capacity "1" \
+	--sku-capacity "10" \
 	--sku-name "Standard"
 {{< /copycode >}} 
 
@@ -262,7 +263,7 @@ AZURE_OPENAI_API_VERSION=<chat-model-api-version>
 
 Now that the chat model has been successfully deployed, you can test it in the playground! In the left navigation menu, navigate to **Playground** and select **Chat**. A chat interface with a free-form text input box will appear. Enter your query in the text box and press Enter to interact with the model.
 
-![alt](../../images/document_data_management_2_azure_oai_3.png)
+![alt](../../images/document_data_management_2_azure_oai_3b.png)
 
 ---
 

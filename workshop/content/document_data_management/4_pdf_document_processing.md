@@ -192,7 +192,8 @@ We're finally ready to publish the function itself! Run the command below to pub
 {{< copycode lang="bash" >}}
 (cd ./azure-function;
 func azure functionapp publish \
-    "${function_app}"
+    "${function_app}" \
+    --python
 )
 {{< /copycode >}} 
 

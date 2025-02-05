@@ -82,6 +82,9 @@ if 'avatar_ai' not in st.session_state:
 if 'default_prompt' not in st.session_state:
     st.session_state['default_prompt'] = 'You are an AI assistant that helps people find information.'
 if 'aoai_client' not in st.session_state:
+    print(endpoint)
+    print(api_key)
+    print(api_version)
     st.session_state['aoai_client'] = AzureOpenAI(
         azure_endpoint=endpoint,
         # azure_ad_token_provider=token_provider,
@@ -313,7 +316,7 @@ def llm_request(msg):
                         "query_type": search_query_type,
                         "endpoint": search_endpoint,
                         "index_name": search_index,
-                        "key": search_api_key,
+                        "authentication": {"type": "api_key","key": search_api_key},
                         "embedding_dependency": {
                             "type": "deployment_name",
                             "deployment_name": deployment_embedding
@@ -337,8 +340,11 @@ def get_llm_completion(prompt):
     except Exception as e:
         st.write(e)
         response = f"The API could not handle this content: {str(e)}"
+        print('>>> here???')
     st.session_state["messages"].append({"role": "assistant", "content": response})
 
+    print('>>> completion')
+    print(completion)
     return json.loads(completion.to_json())
 
 
