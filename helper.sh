@@ -17,10 +17,12 @@ source_file_path="./sample-documents/${file_name}"
 
 model_deployment_name_embedding="${resource_group_name}-embedding"
 model_name_embedding="text-embedding-ada-002"
-model_version_embedding="1"
+model_version_embedding="2"
 model_deployment_name_chat="${resource_group_name}-chat"
 model_name_chat="gpt-4o"
-model_version_chat="2024-08-06"
+model_version_chat="2024-11-20"
+model_api_version_chat="2025-01-01-preview"
+
 
 create_ai_search_data_source() {
     echo ">>> Creating AI Search data source"
@@ -101,7 +103,7 @@ get_bicep_output_value() {
 
 get_blob_sas_token() {
   expiry_30_days=$(date --date="30 days" +"%Y-%m-%d")
-  storage_account_name=$(get_bicep_output_value storage_account_name)
+  # storage_account_name=$(get_bicep_output_value storage_account_name)
 
   connection_string=$(az storage account show-connection-string \
     --name "${storage_account_name}" \
@@ -123,7 +125,9 @@ load_dot_env() {
 }
 
 load_dot_env_aoai() {
-  source .env_aoai
+  if [ -f .env_aoai ]; then
+    source .env_aoai
+  fi
 }
 
 configure_demo_app_env_file() {
@@ -134,7 +138,7 @@ configure_demo_app_env_file() {
   echo "AZURE_OPENAI_ENDPOINT=${AZURE_OPENAI_ENDPOINT}" >> ./demo-app/.env
   echo "AZURE_OPENAI_KEY=${AZURE_OPENAI_KEY}" >> ./demo-app/.env
   echo "AZURE_OPENAI_CHATGPT_DEPLOYMENT=${AZURE_OPENAI_CHATGPT_DEPLOYMENT}" >> ./demo-app/.env
-  echo "AZURE_OPENAI_API_VERSION=${AZURE_OPENAI_API_VERSION}" >> ./demo-app/.env
+  echo "AZURE_OPENAI_API_VERSION=${model_api_version_chat}" >> ./demo-app/.env
   echo "AZURE_OPENAI_CHATGPT_EMBEDDING_DEPLOYMENT=${AZURE_OPENAI_CHATGPT_EMBEDDING_DEPLOYMENT}" >> ./demo-app/.env
 
   echo "SEARCH_ENDPOINT=${base_url}" >> ./demo-app/.env
@@ -286,6 +290,8 @@ case $@ in
     get_blob_sas_token
     ;;
   get-blob-sas|sas)
+    load_dot_env
+
     get_blob_sas_token
     ;;
   create-dot-env-demo-app)
