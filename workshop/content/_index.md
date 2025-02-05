@@ -48,13 +48,12 @@ Go ahead and try it out by clicking on one of these expandable sections!
   4. [PDF Document Processing](/azure-open-ai-rag-oyd-text-images/document_data_management/4_pdf_document_processing/)
   5. [Populating Azure AI Index](/azure-open-ai-rag-oyd-text-images/document_data_management/5_populating_azure_ai_index)
 + *Application Runtime*
-  1. [Overview]()
-  2. [Setting Up Demo App]()
-  3. [Extending With Your Own PDF]()
+  1. [Overview](/azure-open-ai-rag-oyd-text-images/application_runtime/1_overview/)
+  2. [Setting Up Demo App](/azure-open-ai-rag-oyd-text-images/application_runtime/2_setting_up_demo_apps/)
+  3. [Extending With Your Own PDF](/azure-open-ai-rag-oyd-text-images/application_runtime/3_extend/)
 + *Chat Histroy*
-  1. [Overview]()
-  2. [Azure Cosmos DB]()
-+ [Azure Resource Clean Up]()
+  1. [Overview](/azure-open-ai-rag-oyd-text-images/chat_history/1_overview/)
++ [Azure Resource Clean Up](/azure-open-ai-rag-oyd-text-images/clean_up/1_clean_up/)
 
 ---
 
